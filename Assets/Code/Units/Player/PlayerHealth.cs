@@ -2,9 +2,10 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimator))]
-public class PlayerHealth :MonoBehaviour, IHealth, ISavedProgress
+public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
 {
-    public PlayerAnimator Animator;
+    [SerializeField]
+    private PlayerAnimator _animator;
 
     private State _state;
 
@@ -48,6 +49,8 @@ public class PlayerHealth :MonoBehaviour, IHealth, ISavedProgress
             Current = Max;
 
         Current += health;
-        Animator.PlayHit();
+
+        if(health<0)
+            _animator.PlayHit();
     }
 }

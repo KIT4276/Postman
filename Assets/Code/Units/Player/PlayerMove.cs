@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMove : MonoBehaviour, ISavedProgress
 {
     [SerializeField]
-    private CharacterController _characterController;
-    [SerializeField]
     private float _movementSpeed = 4;
+    [SerializeField]
+    private CharacterController _characterController;
 
     private IInputService _input;
 
-    public void Init(IInputService input) => 
+    public void Init(IInputService input) =>
         _input = input;
 
     public void UpdateProgress(PlayerProgress progress) =>

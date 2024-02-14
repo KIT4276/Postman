@@ -8,7 +8,7 @@ public class Attack : MonoBehaviour
     [SerializeField]
     private float _attackCoolDown = 3f;
     [SerializeField]
-    private float Clevage = 0.5f;
+    private float _clevage = 0.5f;
     [SerializeField]
     private float _effectiveDistance = 0.5f;
     [SerializeField]
@@ -55,8 +55,9 @@ public class Attack : MonoBehaviour
     {
         if (Hit(out Collider hit))
         {
-            if (hit.transform.TryGetComponent<IHealth>(out IHealth rplayerHealth))
-                rplayerHealth.ChangeHealth( - _damage);
+            PhysicsDebug.DrawDebug(_bat.transform.position, _clevage, 0.3f);
+            if (hit.transform.TryGetComponent<IHealth>(out IHealth playerHealth))
+                playerHealth.ChangeHealth( - _damage);
         }
     }
 
@@ -74,7 +75,7 @@ public class Attack : MonoBehaviour
 
     private bool Hit(out Collider hit)
     {
-        int hitCount = Physics.OverlapSphereNonAlloc(_bat.transform.position, Clevage, _hits, _layerMask);
+        int hitCount = Physics.OverlapSphereNonAlloc(_bat.transform.position, _clevage, _hits, _layerMask);
 
         hit = _hits.FirstOrDefault();
 

@@ -1,24 +1,33 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(PlayerMove))]
+[RequireComponent(typeof(PlayerAttack))]
+[RequireComponent(typeof(PlayerAnimator))]
 public class PlayerDeath : Death
 {
-    public PlayerHealth Health;
-    public PlayerMove Move;
-    public PlayerAttack Attack;
-    public PlayerAnimator Animator;
-    public GameObject DeathFX;
+    [SerializeField]
+    private PlayerHealth _health;
+    [SerializeField]
+    private PlayerMove _move;
+    [SerializeField]
+    private PlayerAttack _attack;
+    [SerializeField]
+    private PlayerAnimator _animator;
+    [SerializeField]
+    private GameObject _deathFX;
 
     private bool _isDead;
 
     private void Start() =>
-        Health.HealthChanged += HealthChanged;
+        _health.HealthChanged += HealthChanged;
 
     private void OnDestroy() =>
-        Health.HealthChanged -= HealthChanged;
+        _health.HealthChanged -= HealthChanged;
 
     private void HealthChanged()
     {
-        if (!_isDead && Health.Current <= 0)
+        if (!_isDead && _health.Current <= 0)
             Die();
     }
 
@@ -26,11 +35,11 @@ public class PlayerDeath : Death
     {
         _isDead = true;
 
-        Move.enabled = false;
-        Attack.enabled = false;
-        Animator.PlayDeath();
+        _move.enabled = false;
+        _attack.enabled = false;
+        _animator.PlayDeath();
 
-        Instantiate(DeathFX, transform.position, Quaternion.identity);
+        Instantiate(_deathFX, transform.position, Quaternion.identity);
     }
 
     protected override void OnDead()

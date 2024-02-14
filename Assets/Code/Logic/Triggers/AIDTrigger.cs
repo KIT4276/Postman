@@ -5,7 +5,10 @@ using Zenject;
 
 public class AIDTrigger : BaseTrigger
 {
+    [SerializeField]
     public class Pool : MonoMemoryPool<AIDTrigger> { }
+
+    [SerializeField]
     private float _health;
 
     [Inject]
@@ -16,10 +19,12 @@ public class AIDTrigger : BaseTrigger
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<IHealth>(out IHealth health))
+        {
             health.ChangeHealth(_health);
 
-        OffAID?.Invoke();
-        _factory.DespawnAID(this);
+            OffAID?.Invoke();
+            _factory.DespawnAID(this);
+        }
     }
 
     public void SetRecoveryHealth(float value) => 
