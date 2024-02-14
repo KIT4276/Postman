@@ -3,7 +3,7 @@ using UnityEngine;
 //[RequireComponent(typeof(PlayerHealth))]
 //[RequireComponent(typeof(PlayerMove))]
 //[RequireComponent(typeof(PlayerAnimator))]
-public class PlayerDeath : MonoBehaviour
+public class PlayerDeath : Death
 {
     public PlayerHealth Health;
     public PlayerMove Move;
@@ -34,5 +34,10 @@ public class PlayerDeath : MonoBehaviour
         Animator.PlayDeath();
 
         Instantiate(DeathFX, transform.position, Quaternion.identity);
+    }
+
+    protected override void OnDead()
+    {
+        //todo
     }
 }

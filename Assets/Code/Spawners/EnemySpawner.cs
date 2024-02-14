@@ -43,6 +43,7 @@ public class EnemySpawner : Spawner
         _enemy = _enemyFactory.SpawnEnemy(this.transform);
         _enemyDeath = _enemy.GetComponent<EnemyDeath>();
         _enemyDeath.Happened += DeadEnemy;
+        _slain = false;
     }
 
     private void DeadEnemy()

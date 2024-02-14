@@ -16,6 +16,8 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
     private GameObject _entenemiesParentPrefab;
     [SerializeField]
     private GameObject _aidParentPrefab;
+    [SerializeField]
+    private int _EnemyesPoolCount = 20;
 
     private const string Curtain = "Curtain";
     private const string Infrastructure = "Infrastructure";
@@ -85,7 +87,7 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
     private void BindFactories()
     {
         Container.Bind<EnemyFactory>().AsSingle();
-        Container.BindMemoryPool<Enemy, Enemy.Pool>().FromComponentInNewPrefab(_enemyPrefab);
+        Container.BindMemoryPool<Enemy, Enemy.Pool>().WithInitialSize(_EnemyesPoolCount).FromComponentInNewPrefab(_enemyPrefab);
 
         Container.Bind<AIDFactory>().AsSingle();
         Container.BindMemoryPool<AIDTrigger, AIDTrigger.Pool>().FromComponentInNewPrefab(_aidPrefab);

@@ -28,15 +28,12 @@ public class Enemy : MonoBehaviour
     private Attack _attack;
     [SerializeField]
     private Aggro _aggro;
+    [SerializeField]
+    private CheckAttackRange _checkAttackRAnge;
 
     private void Start()
     {
         _enemyDeath.Happened += Death;
-    }
-
-    private void Death()
-    {
-        _animator.Restart();
     }
 
     public void NavMeshEnabled(bool value) =>
@@ -52,7 +49,13 @@ public class Enemy : MonoBehaviour
         _hpBar.SetValue(_enemyHealth.Current, _enemyHealth.Max);
         _attack.Restart();
         _aggro.Restart();
+        _checkAttackRAnge.Restart();
 
-        _animator.Restart();
+        //_animator.Restart();
+    }
+
+    private void Death()
+    {
+        _aggro.End();
     }
 }

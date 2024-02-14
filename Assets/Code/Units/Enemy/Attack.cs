@@ -42,7 +42,7 @@ public class Attack : MonoBehaviour
     {
         _currentAttackCoolDown = _attackCoolDown;
         _isAttacking = false;
-        EnableAttack();
+        //EnableAttack();
     }
 
     private void Update()
@@ -57,7 +57,7 @@ public class Attack : MonoBehaviour
     {
         if (Hit(out Collider hit))
         {
-            Debug.Log("Hit");
+            //Debug.Log("Hit");
             if (hit.transform.TryGetComponent<IHealth>(out IHealth rplayerHealth))
                 rplayerHealth.ChangeHealth( - _damage);
         }

@@ -11,7 +11,6 @@ public class EnemyAnimator: MonoBehaviour, IAnimationStateReader
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int Hit = Animator.StringToHash("Hit");
     private static readonly int Die = Animator.StringToHash("Die");
-    private static readonly int Idle = Animator.StringToHash("Idle");
 
     private readonly int _idleStateHash = Animator.StringToHash("idle");
     private readonly int _attackStateHash = Animator.StringToHash("attack");
@@ -25,12 +24,6 @@ public class EnemyAnimator: MonoBehaviour, IAnimationStateReader
 
     public void PlayHit() => _animator.SetTrigger(Hit);
     public void PlayDeath() => _animator.SetTrigger(Die);
-
-    public void Restart()
-    {
-        EnteredStaste(_idleStateHash);
-        _animator.SetTrigger(Idle);
-    }
 
     public void Move(float speed)
     {

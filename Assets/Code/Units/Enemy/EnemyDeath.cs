@@ -7,7 +7,7 @@ using Zenject;
 [RequireComponent(typeof(EnemyHealth))]
 [RequireComponent(typeof(EnemyAnimator))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyDeath : MonoBehaviour
+public class EnemyDeath : Death
 {
     [SerializeField]
     private EnemyHealth Health;
@@ -49,21 +49,30 @@ public class EnemyDeath : MonoBehaviour
         Health.HealthChanged -= HealthChanged;
 
         Animator.PlayDeath();
-        SpawnDwathFX();
+        //SpawnDwathFX();
         Agent.enabled = false;
-        StartCoroutine(DestroyTimer());
+        //StartCoroutine(DestroyTimer());
     }
 
-    private void SpawnDwathFX() =>
-        Instantiate(DeathFX, transform.position, Quaternion.identity);
-
-    private IEnumerator DestroyTimer()
+    protected override void OnDead()
     {
-        yield return new WaitForSeconds(DestroyDelay);
-
+        Happened?.Invoke();
         Instantiate(DestroyFX, transform.position, Quaternion.identity);
 
-        Happened?.Invoke();
+        
         _factory.DespawnEnemy(_enemy);
     }
+
+    //private void SpawnDwathFX() =>
+    //    Instantiate(DeathFX, transform.position, Quaternion.identity);
+
+    //private IEnumerator DestroyTimer()
+    //{
+    //    yield return new WaitForSeconds(DestroyDelay);
+
+    //    Instantiate(DestroyFX, transform.position, Quaternion.identity);
+
+    //    Happened?.Invoke();
+    //    _factory.DespawnEnemy(_enemy);
+    //}
 }

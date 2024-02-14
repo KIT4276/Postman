@@ -940,6 +940,7 @@ MonoBehaviour:
   _enemyDeath: {fileID: 3793981495746452489}
   _attack: {fileID: 5594956707809700298}
   _aggro: {fileID: 523746505481951681}
+  _checkAttackRAnge: {fileID: 4637911579347093801}
 --- !u!95 &6640042856482524494
 Animator:
   serializedVersion: 5

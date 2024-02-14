@@ -19,7 +19,14 @@ public class Aggro : MonoBehaviour
         TriggerObserver.TriggerEnter += TriggerEnter;
         TriggerObserver.TriggerExit += TriggerExit;
 
-        SwitchFollowOff();
+        SwitchFollow(false);
+    }
+
+    public void End()
+    {
+        StopAggroCoroutine();
+        SwitchFollow(false); 
+        _hasAggroTArget = false;
     }
 
     public void Restart()
@@ -27,7 +34,7 @@ public class Aggro : MonoBehaviour
         TriggerObserver.TriggerEnter += TriggerEnter;
         TriggerObserver.TriggerExit += TriggerExit;
 
-        StopAggroCoroutine();
+        
     }
 
     private void TriggerEnter(Collider obj)
@@ -37,7 +44,7 @@ public class Aggro : MonoBehaviour
             _hasAggroTArget = true;
             StopAggroCoroutine();
 
-            SwitchFollowOn();
+            SwitchFollow(true);
         }
     }
 
@@ -64,12 +71,12 @@ public class Aggro : MonoBehaviour
     {
         yield return new WaitForSeconds(CoolDown);
 
-        SwitchFollowOff();
+        SwitchFollow(false);
     }
 
-    private void SwitchFollowOn() =>
-        _follow.enabled = true;
+    private void SwitchFollow(bool value) =>
+        _follow.enabled = value;
 
-    private void SwitchFollowOff() =>
-        _follow.enabled = false;
+    //private void SwitchFollowOff() =>
+    //    _follow.enabled = false;
 }
