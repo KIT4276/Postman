@@ -12,8 +12,6 @@ public class EnemyDeath : Death
     [SerializeField]
     private NavMeshAgent Agent;
     [SerializeField]
-    private GameObject DeathFX;
-    [SerializeField]
     private float DestroyDelay = 3;
     [SerializeField]
     private GameObject DestroyFX;
@@ -52,7 +50,6 @@ public class EnemyDeath : Death
     {
         Happened?.Invoke();
         Instantiate(DestroyFX, transform.position, Quaternion.identity);
-
         
         _factory.DespawnEnemy(_enemy);
     }

@@ -45,15 +45,13 @@ public class PlayerAttack : MonoBehaviour, ISavedProgressReader
     private int Hit()
     {
 
-        return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward, _stats.DamageRadius, _hits, _layerMask);
+        return Physics.OverlapSphereNonAlloc
+            (_bat.transform.position + transform.forward, _stats.DamageRadius, _hits, _layerMask);
     }
-
-    private Vector3 StartPoint() =>
-        _bat.transform.position;
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(StartPoint(), 0.2f);
+        Gizmos.DrawSphere(_bat.transform.position, 0.2f);
     }
 }

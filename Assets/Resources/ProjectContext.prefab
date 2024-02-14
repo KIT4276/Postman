@@ -158,10 +158,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _curtainPrefab: {fileID: 8493594776518678524, guid: 55ff486b987e4c447a8a9e7daa6a2ad1, type: 3}
   _enterPointPrefab: {fileID: 4092117580142071580, guid: 35bc6d10efa4a5e49b0dee61ddeccaff, type: 3}
-  _enemyPrefab: {fileID: 2971878352626716311, guid: 507164c2085aec546977f81bf1f90f29, type: 3}
+  _enemyPrefab: {fileID: 8973124953401874058, guid: ceff9458bb2ebe840b86fb309ba507db, type: 3}
   _aidPrefab: {fileID: 8693990690450267588, guid: a4ec936bc0a3d6f4393a17151d118c10, type: 3}
   _entenemiesParentPrefab: {fileID: 4183527311121313293, guid: 474e19b72064b5f4aadfa3ac42ae695c, type: 3}
   _aidParentPrefab: {fileID: 1603375342333871807, guid: 315c3b9c741676e4b9a6f71ff5866266, type: 3}
+  _EnemyesPoolCount: 20
 --- !u!1 &8216127234893350899
 GameObject:
   m_ObjectHideFlags: 0
