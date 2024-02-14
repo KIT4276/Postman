@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAnimator))]
 public class EnemyHealth : MonoBehaviour, IHealth
 {
     [SerializeField]

@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Attack))]
 public class CheckAttackRange : MonoBehaviour
 {
     [SerializeField]
@@ -8,10 +7,8 @@ public class CheckAttackRange : MonoBehaviour
     [SerializeField]
     private TriggerObserver TriggerObserver;
 
-    private void Start()
-    {
+    private void Start() => 
         Restart();
-    }
 
     public void Restart()
     {

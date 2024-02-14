@@ -1,5 +1,3 @@
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -8,6 +6,12 @@ using Zenject;
 [RequireComponent(typeof(Follow))]
 [RequireComponent(typeof(EnemyHealth))]
 [RequireComponent(typeof(EnemyDeath))]
+[RequireComponent(typeof(EnemyAnimator))]
+[RequireComponent(typeof(AnimateAlongAgent))]
+[RequireComponent(typeof(Aggro))]
+[RequireComponent(typeof(Attack))]
+[RequireComponent(typeof(CheckAttackRange))]
+[RequireComponent(typeof(ActorUI))]
 public class Enemy : MonoBehaviour
 {
     public class Pool : MonoMemoryPool<Enemy> { }
@@ -31,31 +35,27 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private CheckAttackRange _checkAttackRAnge;
 
-    private void Start()
-    {
+    private void Start() => 
         _enemyDeath.Happened += Death;
-    }
 
     public void NavMeshEnabled(bool value) =>
         _agent.enabled = value;
 
     public void Restart()
     {
+        _enemyDeath.Happened += Death;
+
         _enemyHealth.Restart();
-
         _enemyDeath.Restart();
-        
-
         _hpBar.SetValue(_enemyHealth.Current, _enemyHealth.Max);
         _attack.Restart();
         _aggro.Restart();
         _checkAttackRAnge.Restart();
-
-        //_animator.Restart();
     }
 
-    private void Death()
-    {
+    private void Death() => 
         _aggro.End();
-    }
+
+    private void OnDisable() => 
+        _enemyDeath.Happened -= Death;
 }

@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-[RequireComponent(typeof(EnemyAnimator))]
 public class AnimateAlongAgent : MonoBehaviour
 {
     [SerializeField]

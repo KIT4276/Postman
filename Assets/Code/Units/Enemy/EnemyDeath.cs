@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
 
-[RequireComponent(typeof(EnemyHealth))]
-[RequireComponent(typeof(EnemyAnimator))]
-[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyDeath : Death
 {
     [SerializeField]
@@ -49,9 +45,7 @@ public class EnemyDeath : Death
         Health.HealthChanged -= HealthChanged;
 
         Animator.PlayDeath();
-        //SpawnDwathFX();
         Agent.enabled = false;
-        //StartCoroutine(DestroyTimer());
     }
 
     protected override void OnDead()
@@ -62,17 +56,4 @@ public class EnemyDeath : Death
         
         _factory.DespawnEnemy(_enemy);
     }
-
-    //private void SpawnDwathFX() =>
-    //    Instantiate(DeathFX, transform.position, Quaternion.identity);
-
-    //private IEnumerator DestroyTimer()
-    //{
-    //    yield return new WaitForSeconds(DestroyDelay);
-
-    //    Instantiate(DestroyFX, transform.position, Quaternion.identity);
-
-    //    Happened?.Invoke();
-    //    _factory.DespawnEnemy(_enemy);
-    //}
 }

@@ -1,7 +1,6 @@
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAnimator))]
 public class Attack : MonoBehaviour
 {
     [SerializeField]
@@ -42,7 +41,6 @@ public class Attack : MonoBehaviour
     {
         _currentAttackCoolDown = _attackCoolDown;
         _isAttacking = false;
-        //EnableAttack();
     }
 
     private void Update()
@@ -57,7 +55,6 @@ public class Attack : MonoBehaviour
     {
         if (Hit(out Collider hit))
         {
-            //Debug.Log("Hit");
             if (hit.transform.TryGetComponent<IHealth>(out IHealth rplayerHealth))
                 rplayerHealth.ChangeHealth( - _damage);
         }

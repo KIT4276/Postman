@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -33,8 +32,6 @@ public class Aggro : MonoBehaviour
     {
         TriggerObserver.TriggerEnter += TriggerEnter;
         TriggerObserver.TriggerExit += TriggerExit;
-
-        
     }
 
     private void TriggerEnter(Collider obj)
@@ -76,7 +73,4 @@ public class Aggro : MonoBehaviour
 
     private void SwitchFollow(bool value) =>
         _follow.enabled = value;
-
-    //private void SwitchFollowOff() =>
-    //    _follow.enabled = false;
 }

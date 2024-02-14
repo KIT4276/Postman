@@ -1,8 +1,5 @@
 using UnityEngine;
 
-//[RequireComponent(typeof(PlayerHealth))]
-//[RequireComponent(typeof(PlayerMove))]
-//[RequireComponent(typeof(PlayerAnimator))]
 public class PlayerDeath : Death
 {
     public PlayerHealth Health;
