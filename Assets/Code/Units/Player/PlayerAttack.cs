@@ -40,7 +40,7 @@ public class PlayerAttack : MonoBehaviour, ISavedProgressReader
     }
 
     public void LoadProgress(PlayerProgress progress) =>
-        _stats = progress.HeroStats;
+        _stats = progress.PlayerStats;
 
     private int Hit()
     {
