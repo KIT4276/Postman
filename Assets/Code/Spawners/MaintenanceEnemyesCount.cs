@@ -28,7 +28,7 @@ public class MaintenanceEnemyesCount
 
     private void CheckEnemiesCount()
     {
-        if (_factory.Enemies.Count <= 10) //move magic number to stats  
+        if (_factory.Enemies.Count <= 6) //move magic number to stats  
             foreach (var spawner in _spawners)
             {
                 spawner.SpawnIfEmpty();

@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(PlayerAttack))]
-[RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerHealth))]
 [RequireComponent(typeof(PlayerDeath))]
-[RequireComponent(typeof(PlayerMove))]
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Collider))]
-public class Player : MonoBehaviour
-{
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(Backpack))]
 
-}
+//PROTECTION AGAINST FOOL
+
+public class Player : MonoBehaviour { }

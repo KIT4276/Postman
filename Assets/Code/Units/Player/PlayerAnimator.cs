@@ -1,10 +1,14 @@
 ﻿using System;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour, IAnimationStateReader
 {
-    [SerializeField] private CharacterController _characterController;
-    [SerializeField] public Animator _animator;
+    [SerializeField]
+    private CharacterController _characterController;
+    [SerializeField]
+    private Animator _animator;
 
     private static readonly int MoveHash = Animator.StringToHash("Walking");
     private static readonly int AttackHash = Animator.StringToHash("Attack");
@@ -23,31 +27,20 @@ public class PlayerAnimator : MonoBehaviour, IAnimationStateReader
     public AnimatorState State { get; private set; }
     public bool IsAttacking => State == AnimatorState.Attack;
 
-    private void Update()
-    {
+    private void Update() => 
         _animator.SetFloat(MoveHash, _characterController.velocity.magnitude, 0.1f, Time.deltaTime);
-    }
 
-    public void PlayHit()
-    {
+    public void PlayHit() =>
         _animator.SetTrigger(HitHash);
-    }
 
-    public void PlayAttack()
-    {
-        //Debug.Log("PlayAttack");
+    public void PlayAttack() =>
         _animator.SetTrigger(AttackHash);
-    }
 
-    public void PlayDeath()
-    {
+    public void PlayDeath() =>
         _animator.SetTrigger(DieHash);
-    }
 
-    public void ResetToIdle()
-    {
+    public void ResetToIdle() =>
         _animator.Play(_idleStateHash, -1);
-    }
 
     public void EnteredStaste(int stateHash)
     {
@@ -55,10 +48,8 @@ public class PlayerAnimator : MonoBehaviour, IAnimationStateReader
         StateEntered?.Invoke(State);
     }
 
-    public void ExitedStste(int stateHash)
-    {
+    public void ExitedStste(int stateHash) =>
         StateExited?.Invoke(StateFor(stateHash));
-    }
 
     private AnimatorState StateFor(int stateHash)
     {
