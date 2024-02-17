@@ -1,3 +1,4 @@
+using System;
 using Zenject;
 
 public class GameplayInstaller : MonoInstaller
@@ -5,12 +6,16 @@ public class GameplayInstaller : MonoInstaller
     public override void InstallBindings()
     {
         InstallPost();
+        InstallSalary();
         InstallParcelGenerator();
         InstallDeliveredParcelsCounter();
 
         InstallMaintenanceEnemyesCount();
         InstallMaintenanceAIDCount();
     }
+
+    private void InstallSalary() => 
+        Container.BindInterfacesAndSelfTo<Salary>().FromNew().AsSingle().NonLazy();
 
     private void InstallMaintenanceAIDCount() =>
        Container.BindInterfacesAndSelfTo<MaintenanceAIDCount>().FromNew().AsSingle().NonLazy();

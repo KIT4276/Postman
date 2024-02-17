@@ -17,11 +17,13 @@ public class GameFactory : IService
 
     private readonly EnemyFactory _enemyFactory;
     private readonly DeliveredParcelsCounter _counter;
+    private readonly Salary _salary;
 
-    public GameFactory(EnemyFactory enemyFactory, DeliveredParcelsCounter counter )
+    public GameFactory(EnemyFactory enemyFactory, DeliveredParcelsCounter counter, Salary salary )
     {
         _enemyFactory = enemyFactory;
         _counter = counter;
+        _salary = salary;
     }
 
     public GameObject CreatePlayerAt(GameObject at, IInputService input)
@@ -37,6 +39,7 @@ public class GameFactory : IService
     {
         var hud = InstantiateRegistered(AssetPath.HUDPath);
         hud.GetComponent<EnemiesCount>().SetEnemyFactory(_enemyFactory);
+        hud.GetComponent<MoneyPanel>().SetSalary(_salary);
         hud.GetComponent<DeliveredParcelsPanel>().SetCounter(_counter);
         return hud;
     }
