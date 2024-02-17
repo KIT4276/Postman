@@ -14,7 +14,7 @@ public class MoneyPanel : MonoBehaviour
     private void Start()
     {
         AddMoney();
-        _salary.SalaryPaymentE += AddMoney;
+        _salary.ManyChangeE += AddMoney;
     }
 
     private void AddMoney() => 
@@ -22,6 +22,6 @@ public class MoneyPanel : MonoBehaviour
 
     private void OnDestroy()
     {
-        _salary.SalaryPaymentE -= AddMoney;
+        _salary.ManyChangeE -= AddMoney;
     }
 }

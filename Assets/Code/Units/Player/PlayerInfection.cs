@@ -6,6 +6,8 @@ public class PlayerInfection : MonoBehaviour, ISavedProgress
     [SerializeField]
     private PlayerHealth _health;
 
+    private bool _heal;
+
     public float InfectedValue { get; private set; }
     public bool IsInfectes { get; private set; }
 
@@ -14,6 +16,8 @@ public class PlayerInfection : MonoBehaviour, ISavedProgress
 
     public void StopInfection()
     {
+        _heal = true;
+
         IsInfectes = false;
         InfectedValue = 0;
     }
@@ -21,6 +25,7 @@ public class PlayerInfection : MonoBehaviour, ISavedProgress
     private void StartInfection()
     {
         IsInfectes = true;
+        _heal = false;
         StartCoroutine(InfectionCoroutine());
     }
 
@@ -29,14 +34,14 @@ public class PlayerInfection : MonoBehaviour, ISavedProgress
         while (InfectedValue < 100)
         {
             InfectedValue += Time.deltaTime;
+            if (_heal) yield break;
+
             yield return null;
         }
-
-        _health.ChangeHealth(-_health.Current);
+        if (!_heal)
+            _health.ChangeHealth(-_health.Current);
     }
 
-    private void OnDestroy() => 
-        _health.GetHit -= StartInfection;
 
     public void UpdateProgress(PlayerProgress progress)
     {
@@ -52,4 +57,7 @@ public class PlayerInfection : MonoBehaviour, ISavedProgress
         if (IsInfectes)
             StartInfection();
     }
+
+    private void OnDestroy() => 
+        _health.GetHit -= StartInfection;
 }

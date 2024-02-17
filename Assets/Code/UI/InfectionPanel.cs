@@ -11,7 +11,7 @@ public class InfectionPanel : MonoBehaviour
     public void SetInfection(PlayerInfection infection) => 
         _infection = infection;
 
-    private void Update()// move to public method
+    private void LateUpdate()
     {
         ImageCurrent.fillAmount = _infection.InfectedValue/100;
     }

@@ -15,15 +15,17 @@ public class GameFactory : IService
     private readonly EnemyFactory _enemyFactory;
     private readonly DeliveredParcelsCounter _counter;
     private readonly Salary _salary;
+    private readonly Healing _healing;
     private readonly IAssets _assets;
 
     public GameFactory(EnemyFactory enemyFactory, IAssets assets, DeliveredParcelsCounter counter,
-        Salary salary)
+        Salary salary, Healing healing)
     {
         _enemyFactory = enemyFactory;
         _assets = assets;
         _counter = counter;
         _salary = salary;
+        _healing = healing;
     }
 
     public GameObject CreatePlayerAt(GameObject at, IInputService input)
@@ -31,6 +33,7 @@ public class GameFactory : IService
         PlayerGameObject = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
         PlayerGameObject.GetComponent<PlayerMove>().Init(input);
         PlayerGameObject.GetComponent<PlayerAttack>().Init(input);
+        PlayerGameObject.GetComponent<PlayerHealing>().SetHealing(_healing);
         PlayerCreated?.Invoke();
         return PlayerGameObject;
     }
@@ -42,6 +45,7 @@ public class GameFactory : IService
         hud.GetComponent<MoneyPanel>().SetSalary(_salary);
         hud.GetComponent<DeliveredParcelsPanel>().SetCounter(_counter);
         hud.GetComponent<InfectionPanel>().SetInfection(PlayerGameObject.GetComponent<PlayerInfection>());
+        hud.GetComponent<HealButton>().Init(_salary, _healing);
         return hud;
     }
 

@@ -13,7 +13,12 @@ public class GameplayInstaller : MonoInstaller
 
         InstallMaintenanceEnemyesCount();
         InstallMaintenanceAIDCount();
+
+        InstallHealing();
     }
+
+    private void InstallHealing() => 
+        Container.BindInterfacesAndSelfTo<Healing>().FromNew().AsSingle().NonLazy();
 
     private void InstallSalary() => 
         Container.BindInterfacesAndSelfTo<Salary>().FromNew().AsSingle().NonLazy();
