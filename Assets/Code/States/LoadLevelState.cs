@@ -20,11 +20,12 @@ public class LoadLevelState : IPayloadedState<string>
     private readonly MaintenanceEnemyesCount _maintenanceEC;
     private readonly MaintenanceAIDCount _maintenanceAC;
     private readonly Salary _salary;
+    private readonly Infection _infection;
 
     public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
         GameFactory gameFactory, IInputService input, IPersistantProgressService progressService, Post addresses, 
         ParcelGenerator parcelGenerator, DeliveredParcelsCounter counter, MaintenanceEnemyesCount maintenanceEC,
-        MaintenanceAIDCount maintenanceAC, Salary salary)
+        MaintenanceAIDCount maintenanceAC, Salary salary, Infection infection)
     {
         _stateMachine = stateMachine;
         _sceneLoader = sceneLoader;
@@ -38,6 +39,7 @@ public class LoadLevelState : IPayloadedState<string>
         _maintenanceEC = maintenanceEC;
         _maintenanceAC = maintenanceAC;
         _salary = salary;
+        _infection = infection;
     }
 
     public void Enter(string sceneName)

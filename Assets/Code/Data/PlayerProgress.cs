@@ -9,6 +9,7 @@ public class PlayerProgress
     public KillData KillData;
     public PostData PostData;
     public MoneyData MoneyData;
+    public InfectedData InfectedData;
 
     public PlayerProgress(string initialLevel)
     {
@@ -18,5 +19,6 @@ public class PlayerProgress
         KillData = new KillData();
         PostData = new PostData();
         MoneyData = new MoneyData();
+        InfectedData = new InfectedData();
     }
 }

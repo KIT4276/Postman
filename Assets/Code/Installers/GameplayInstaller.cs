@@ -10,10 +10,14 @@ public class GameplayInstaller : MonoInstaller
         InstallParcelGenerator();
         InstallDeliveredParcelsCounter();
         InstallSalary();
+        InstallInfection();
 
         InstallMaintenanceEnemyesCount();
         InstallMaintenanceAIDCount();
     }
+
+    private void InstallInfection() => 
+        Container.BindInterfacesAndSelfTo<Infection>().FromNew().AsSingle().NonLazy();
 
     private void InstallSalary() => 
         Container.BindInterfacesAndSelfTo<Salary>().FromNew().AsSingle().NonLazy();
