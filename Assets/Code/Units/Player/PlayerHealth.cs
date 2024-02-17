@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
     private State _state;
 
     public event Action HealthChanged;
+    public event Action GetHit;
 
     public float Current
     {
@@ -50,7 +51,11 @@ public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
 
         Current += health;
 
-        if(health<0)
+        if (health < 0)
+        {
             _animator.PlayHit();
+            GetHit?.Invoke();
+        }
+
     }
 }

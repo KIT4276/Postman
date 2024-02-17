@@ -6,13 +6,13 @@ public class InfectionPanel : MonoBehaviour
     [SerializeField]
     public Image ImageCurrent;
 
-    private Infection _infection;
+    private PlayerInfection _infection;
 
-    public void SetInfection(Infection infection) => 
+    public void SetInfection(PlayerInfection infection) => 
         _infection = infection;
 
     private void Update()// move to public method
     {
-        ImageCurrent.fillAmount = _infection.InfectedValue;
+        ImageCurrent.fillAmount = _infection.InfectedValue/100;
     }
 }

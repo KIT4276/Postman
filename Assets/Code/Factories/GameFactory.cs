@@ -15,16 +15,15 @@ public class GameFactory : IService
     private readonly EnemyFactory _enemyFactory;
     private readonly DeliveredParcelsCounter _counter;
     private readonly Salary _salary;
-    private readonly Infection _infection;
     private readonly IAssets _assets;
 
-    public GameFactory(EnemyFactory enemyFactory, IAssets assets, DeliveredParcelsCounter counter, Salary salary, Infection infection)
+    public GameFactory(EnemyFactory enemyFactory, IAssets assets, DeliveredParcelsCounter counter,
+        Salary salary)
     {
         _enemyFactory = enemyFactory;
         _assets = assets;
         _counter = counter;
         _salary = salary;
-        _infection = infection;
     }
 
     public GameObject CreatePlayerAt(GameObject at, IInputService input)
@@ -42,7 +41,7 @@ public class GameFactory : IService
         hud.GetComponent<EnemiesCount>().SetEnemyFactory(_enemyFactory);
         hud.GetComponent<MoneyPanel>().SetSalary(_salary);
         hud.GetComponent<DeliveredParcelsPanel>().SetCounter(_counter);
-        hud.GetComponent<InfectionPanel>().SetInfection(_infection);
+        hud.GetComponent<InfectionPanel>().SetInfection(PlayerGameObject.GetComponent<PlayerInfection>());
         return hud;
     }
 
