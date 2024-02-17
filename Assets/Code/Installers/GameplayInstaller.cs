@@ -6,9 +6,10 @@ public class GameplayInstaller : MonoInstaller
     public override void InstallBindings()
     {
         InstallPost();
-        InstallSalary();
+        
         InstallParcelGenerator();
         InstallDeliveredParcelsCounter();
+        InstallSalary();
 
         InstallMaintenanceEnemyesCount();
         InstallMaintenanceAIDCount();

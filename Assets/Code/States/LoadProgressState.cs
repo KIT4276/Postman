@@ -5,7 +5,8 @@
     private readonly IPersistantProgressService _progressService;
     private readonly ISaveLoadService _saveLoadService;
 
-    public LoadProgressState(StateMachine gameStateMachine, IPersistantProgressService progressService, ISaveLoadService saveLoadService)
+    public LoadProgressState(StateMachine gameStateMachine, IPersistantProgressService progressService,
+        ISaveLoadService saveLoadService)
     {
         _gameStateMachine = gameStateMachine;
         _progressService = progressService;
@@ -19,10 +20,7 @@
         _gameStateMachine.Enter<LoadLevelState, string>(_progressService.Progress.WorldData.PositionOnLevel.Level);
     }
 
-    public void Exit()
-    {
-
-    }
+    public void Exit() { }
 
     private void LoadProgressOrInitNew() =>
         _progressService.Progress = _saveLoadService.LoadProgress() ?? NewProgress();
@@ -31,7 +29,7 @@
     {
         var progress = new PlayerProgress(initialLevel: Main);
 
-        progress.HeroState.MaxHP = 50;
+        progress.HeroState.MaxHP = 50; // get rid of magic numbers
         progress.PlayerStats.Damage = 1f;
         progress.PlayerStats.DamageRadius = 0.5f;
 

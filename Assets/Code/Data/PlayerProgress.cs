@@ -8,6 +8,7 @@ public class PlayerProgress
     public Stats PlayerStats;
     public KillData KillData;
     public PostData PostData;
+    public MoneyData MoneyData;
 
     public PlayerProgress(string initialLevel)
     {
@@ -16,5 +17,6 @@ public class PlayerProgress
         PlayerStats = new Stats();
         KillData = new KillData();
         PostData = new PostData();
+        MoneyData = new MoneyData();
     }
 }

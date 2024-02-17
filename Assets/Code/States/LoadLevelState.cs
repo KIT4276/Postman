@@ -19,11 +19,12 @@ public class LoadLevelState : IPayloadedState<string>
     private readonly DeliveredParcelsCounter _counter;
     private readonly MaintenanceEnemyesCount _maintenanceEC;
     private readonly MaintenanceAIDCount _maintenanceAC;
+    private readonly Salary _salary;
 
     public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
         GameFactory gameFactory, IInputService input, IPersistantProgressService progressService, Post addresses, 
         ParcelGenerator parcelGenerator, DeliveredParcelsCounter counter, MaintenanceEnemyesCount maintenanceEC,
-        MaintenanceAIDCount maintenanceAC)
+        MaintenanceAIDCount maintenanceAC, Salary salary)
     {
         _stateMachine = stateMachine;
         _sceneLoader = sceneLoader;
@@ -36,6 +37,7 @@ public class LoadLevelState : IPayloadedState<string>
         _counter = counter;
         _maintenanceEC = maintenanceEC;
         _maintenanceAC = maintenanceAC;
+        _salary = salary;
     }
 
     public void Enter(string sceneName)
@@ -85,6 +87,7 @@ public class LoadLevelState : IPayloadedState<string>
                 _addresses.SetAddress(address.GetComponent<AddressTrigger>());
             }
             _gameFactory.Register(_counter);
+            _gameFactory.Register(_salary);
             _parcelGenerator.StartGenerate();
         }
     }

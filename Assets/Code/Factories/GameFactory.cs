@@ -5,9 +5,6 @@ using Zenject;
 
 public class GameFactory : IService
 {
-    [Inject]
-    private IAssets _assets;
-
     public event Action PlayerCreated;
 
     public GameObject PlayerGameObject { get; private set; }
@@ -18,10 +15,12 @@ public class GameFactory : IService
     private readonly EnemyFactory _enemyFactory;
     private readonly DeliveredParcelsCounter _counter;
     private readonly Salary _salary;
+    private readonly IAssets _assets;
 
-    public GameFactory(EnemyFactory enemyFactory, DeliveredParcelsCounter counter, Salary salary )
+    public GameFactory(EnemyFactory enemyFactory, IAssets assets, DeliveredParcelsCounter counter, Salary salary)
     {
         _enemyFactory = enemyFactory;
+        _assets = assets;
         _counter = counter;
         _salary = salary;
     }

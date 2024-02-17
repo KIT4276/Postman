@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class Salary : ISavedProgress
 {
@@ -25,13 +22,9 @@ public class Salary : ISavedProgress
         SalaryPaymentE?.Invoke();
     }
 
-    public void UpdateProgress(PlayerProgress progress)
-    {
-       //todo
-    }
+    public void UpdateProgress(PlayerProgress progress) => 
+        progress.MoneyData.Money = Money;
 
-    public void LoadProgress(PlayerProgress progress)
-    {
-        //todo
-    }
+    public void LoadProgress(PlayerProgress progress) => 
+        Money = progress.MoneyData.Money;
 }
