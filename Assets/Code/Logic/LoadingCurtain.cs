@@ -22,7 +22,5 @@ public class LoadingCurtain : MonoBehaviour
             Curtain.alpha -= 0.03f;
             yield return new WaitForSeconds(0.03f);
         }
-
-        //gameObject.SetActive(false);
     }
 }

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 public class ParcelGenerator
 {
-    public string CurrentAddress { get; private set; }
-
     private readonly Post _post;
+    public string CurrentAddress { get; private set; }
 
     public event Action GenerateAddressE;
 

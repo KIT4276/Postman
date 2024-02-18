@@ -2,11 +2,8 @@
 
 public class Healing
 {
-
     public event Action ToHealE;
 
-    public void ToHeal()
-    {
+    public void ToHeal() => 
         ToHealE?.Invoke();
-    }
 }

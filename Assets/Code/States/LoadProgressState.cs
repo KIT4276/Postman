@@ -1,22 +1,25 @@
-﻿public class LoadProgressState : IState
+﻿
+public class LoadProgressState : IState
 {
     private const string Main = "Main";
+
     private readonly StateMachine _gameStateMachine;
     private readonly IPersistantProgressService _progressService;
     private readonly ISaveLoadService _saveLoadService;
+    private readonly PersistantPlayerStaticData _persistantPlayerStaticData;
 
     public LoadProgressState(StateMachine gameStateMachine, IPersistantProgressService progressService,
-        ISaveLoadService saveLoadService)
+        ISaveLoadService saveLoadService, PersistantPlayerStaticData persistantPlayerStaticData)
     {
         _gameStateMachine = gameStateMachine;
         _progressService = progressService;
         _saveLoadService = saveLoadService;
+        _persistantPlayerStaticData = persistantPlayerStaticData;
     }
 
     public void Enter()
     {
         LoadProgressOrInitNew();
-
         _gameStateMachine.Enter<LoadLevelState, string>(_progressService.Progress.WorldData.PositionOnLevel.Level);
     }
 
@@ -29,11 +32,11 @@
     {
         var progress = new PlayerProgress(initialLevel: Main);
 
-        progress.HeroState.MaxHP = 50; // get rid of magic numbers
-        progress.PlayerStats.Damage = 1f;
-        progress.PlayerStats.DamageRadius = 0.5f;
+        progress.PlayerState.MaxHP = _persistantPlayerStaticData.MaxHP;
+        progress.PlayerStats.Damage = _persistantPlayerStaticData.Damage;
+        progress.PlayerStats.DamageRadius = _persistantPlayerStaticData.DamageRadius;
 
-        progress.HeroState.ResetHP();
+        progress.PlayerState.ResetHP();
 
         return progress;
     }

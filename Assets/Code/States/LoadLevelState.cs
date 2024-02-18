@@ -4,22 +4,23 @@ public class LoadLevelState : IPayloadedState<string>
 {
     private const string InitialPointTag = "InitialPoint";
     private const string EnemySpawnerTag = "EnemySpawner";
-    
     private const string AIDSpawnerTAg = "AIDSpawner";
     private const string AddressTag = "Address";
+
     private readonly StateMachine _stateMachine;
     private readonly SceneLoader _sceneLoader;
     private readonly LoadingCurtain _curtain;
     private readonly GameFactory _gameFactory;
     private readonly IInputService _input;
-    private IPersistantProgressService _progressService;
-    private GameObject _playerObj;
-    private Post _addresses;
-    private ParcelGenerator _parcelGenerator;
+    private readonly IPersistantProgressService _progressService;
+    private readonly Post _addresses;
+    private readonly ParcelGenerator _parcelGenerator;
     private readonly DeliveredParcelsCounter _counter;
     private readonly MaintenanceEnemyesCount _maintenanceEC;
     private readonly MaintenanceAIDCount _maintenanceAC;
     private readonly Salary _salary;
+
+    private GameObject _playerObj;
 
     public LoadLevelState(StateMachine stateMachine, SceneLoader sceneLoader, LoadingCurtain curtain,
         GameFactory gameFactory, IInputService input, IPersistantProgressService progressService, Post addresses, 
@@ -109,16 +110,11 @@ public class LoadLevelState : IPayloadedState<string>
         }
     }
 
-    private GameObject InitPlayer()
-    {
-        return _gameFactory.CreatePlayerAt(GameObject.FindWithTag(InitialPointTag), _input);
-    }
+    private GameObject InitPlayer() =>
+        _gameFactory.CreatePlayerAt(GameObject.FindWithTag(InitialPointTag), _input);
 
-    private void InitHud(GameObject player)
-    {
-        GameObject hud = _gameFactory.CreateHud();
-        hud.GetComponentInChildren<ActorUI>().Construct(player.GetComponent<PlayerHealth>());
-    }
+    private void InitHud(GameObject player) => 
+        _gameFactory.CreateHud().GetComponentInChildren<ActorUI>().Construct(player.GetComponent<PlayerHealth>());
 
     private void CameraFollow(GameObject player) =>
         Camera.main.GetComponent<CameraFollow>().Follow(player.transform);

@@ -9,9 +9,6 @@ public class SpawnersRotate : MonoBehaviour
     private void Start()
     {
         foreach (Transform spawner in _spawners) 
-            spawner.rotation = Quaternion.Euler(transform.rotation.x, RandomY(), transform.rotation.z);
+            spawner.rotation = Quaternion.Euler(transform.rotation.x, Random.Range(0, 360), transform.rotation.z);
     }
-
-    private float RandomY() =>
-        Random.Range(0, 360);
 }

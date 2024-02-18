@@ -2,9 +2,9 @@
 
 public class DeliveredParcelsCounter : ISavedProgress
 {
-    public int DeliveredParcelsCount { get; private set; }
 
     private readonly ParcelGenerator _generator;
+    public int DeliveredParcelsCount { get; private set; }
 
     public event Action ChangeCount;
 

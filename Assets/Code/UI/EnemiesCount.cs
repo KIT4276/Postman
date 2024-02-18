@@ -1,7 +1,5 @@
-using System;
 using TMPro;
 using UnityEngine;
-using Zenject;
 
 public class EnemiesCount : MonoBehaviour
 {
@@ -22,8 +20,6 @@ public class EnemiesCount : MonoBehaviour
     private void UpdateEnemy() => 
         _text.text = _enemyFactory.GetEnemiesCount().ToString();
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() => 
         _enemyFactory.ChangeEnemiesCount -= UpdateEnemy;
-    }
 }

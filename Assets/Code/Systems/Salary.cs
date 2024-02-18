@@ -2,17 +2,21 @@ using System;
 
 public class Salary : ISavedProgress
 {
-    private Post _post;
-    private float _salaryAmount = 50; // move to stats
+    private readonly Post _post;
+    private readonly PersistantStaticData _staticData;
+
+    private float _salaryAmount;
 
     public event Action ManyChangeE;
 
     public float Money { get; private set; }
 
-    public Salary(Post post)
+    public Salary(Post post, PersistantStaticData staticData)
     {
         _post = post;
+        _staticData = staticData;
 
+        _salaryAmount = _staticData.SalaryAmount;
         _post.AddressEnterE += SalaryPayment;
     }
 

@@ -7,9 +7,13 @@ public class PlayerInfection : MonoBehaviour, ISavedProgress
     private PlayerHealth _health;
 
     private bool _heal;
+    private float _infectionSpeed;
 
     public float InfectedValue { get; private set; }
     public bool IsInfectes { get; private set; }
+
+    public void Init(PersistantPlayerStaticData playerData) =>
+        _infectionSpeed = playerData.InfectionSpeed;
 
     private void Start() => 
         _health.GetHit += StartInfection;
@@ -33,7 +37,7 @@ public class PlayerInfection : MonoBehaviour, ISavedProgress
     {
         while (InfectedValue < 100)
         {
-            InfectedValue += Time.deltaTime;
+            InfectedValue += _infectionSpeed * Time.deltaTime;
             if (_heal) yield break;
 
             yield return null;

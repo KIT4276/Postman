@@ -1,37 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class MaintenanceEnemyesCount  
+public class MaintenanceEnemyesCount
 {
     private const string EnemySpawnerTag = "EnemySpawner";
+
     private readonly EnemyFactory _factory;
+    private readonly PersistantStaticData _staticData;
 
     private List<EnemySpawner> _spawners = new List<EnemySpawner>();
 
-    public MaintenanceEnemyesCount(EnemyFactory enemyFactory)
+    public MaintenanceEnemyesCount(EnemyFactory enemyFactory, PersistantStaticData staticData)
     {
         _factory = enemyFactory;
-
+        _staticData = staticData;
         _factory.DeadSumEnemyEvent += CheckEnemiesCount;
     }
 
     public void SetSpawners()
     {
-        if(GameObject.FindGameObjectsWithTag(EnemySpawnerTag) != null)
+        if (GameObject.FindGameObjectsWithTag(EnemySpawnerTag) != null)
             foreach (var spawner in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
-            {
                 _spawners.Add(spawner.GetComponent<EnemySpawner>());
-            }
-
     }
 
     private void CheckEnemiesCount()
     {
-        if (_factory.Enemies.Count <= 6) //move magic number to stats  
+        if (_factory.Enemies.Count <= _staticData.EnemiesMinCount) //move magic number to stats  
             foreach (var spawner in _spawners)
-            {
                 spawner.SpawnIfEmpty();
-            }
     }
 }

@@ -32,14 +32,14 @@ public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
 
     public void LoadProgress(PlayerProgress progress)
     {
-        _state = progress.HeroState;
+        _state = progress.PlayerState;
         HealthChanged?.Invoke();
     }
 
     public void UpdateProgress(PlayerProgress progress)
     {
-        progress.HeroState.CurrentHP = Current;
-        progress.HeroState.MaxHP = Max;
+        progress.PlayerState.CurrentHP = Current;
+        progress.PlayerState.MaxHP = Max;
     }
 
     public void ChangeHealth(float health)

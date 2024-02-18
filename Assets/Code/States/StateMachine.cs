@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class StateMachine
 {
     private readonly StateFactory _stateFactory;
 
     private Dictionary<Type, IExitableState> _states;
+
     private IExitableState _activeState;
     private bool _isInited;
 

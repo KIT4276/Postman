@@ -2,11 +2,12 @@
 
 public partial class ActorUI : MonoBehaviour
 {
-    public HpBar HpBar;
+    [SerializeField]
+    private HpBar HpBar;
 
     private IHealth _heroHealth;
 
-    private bool _isSigned; ////убрать, когда будем работтать с фабриками и спавном
+    private bool _isSigned; ////remove it when we work with factories and spawn
 
     public void Construct(IHealth health)
     {
@@ -16,7 +17,7 @@ public partial class ActorUI : MonoBehaviour
         _isSigned = true;
     }
 
-    private void Start() //убрать, когда будем работтать с фабриками и спавном
+    private void Start() //remove it when we work with factories and spawn
     {
         IHealth health = GetComponent<IHealth>();
 
