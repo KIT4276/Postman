@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
     private State _state;
 
     public event Action HealthChanged;
+    public event Action GetHit;
 
     public float Current
     {
@@ -31,14 +32,14 @@ public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
 
     public void LoadProgress(PlayerProgress progress)
     {
-        _state = progress.HeroState;
+        _state = progress.PlayerState;
         HealthChanged?.Invoke();
     }
 
     public void UpdateProgress(PlayerProgress progress)
     {
-        progress.HeroState.CurrentHP = Current;
-        progress.HeroState.MaxHP = Max;
+        progress.PlayerState.CurrentHP = Current;
+        progress.PlayerState.MaxHP = Max;
     }
 
     public void ChangeHealth(float health)
@@ -50,7 +51,11 @@ public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
 
         Current += health;
 
-        if(health<0)
+        if (health < 0)
+        {
             _animator.PlayHit();
+            GetHit?.Invoke();
+        }
+
     }
 }

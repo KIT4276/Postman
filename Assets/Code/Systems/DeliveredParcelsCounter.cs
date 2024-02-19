@@ -2,10 +2,9 @@
 
 public class DeliveredParcelsCounter : ISavedProgress
 {
-    public int DeliveredParcelsCount { get; private set; }
-
 
     private readonly ParcelGenerator _generator;
+    public int DeliveredParcelsCount { get; private set; }
 
     public event Action ChangeCount;
 
@@ -22,13 +21,9 @@ public class DeliveredParcelsCounter : ISavedProgress
         ChangeCount?.Invoke();
     }
 
-    public void UpdateProgress(PlayerProgress progress)
-    {
+    public void UpdateProgress(PlayerProgress progress) => 
         progress.PostData.DeliveredParcelsCount = DeliveredParcelsCount;
-    }
 
-    public void LoadProgress(PlayerProgress progress)
-    {
+    public void LoadProgress(PlayerProgress progress) => 
         DeliveredParcelsCount = progress.PostData.DeliveredParcelsCount;
-    }
 }

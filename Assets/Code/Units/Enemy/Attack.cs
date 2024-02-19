@@ -53,7 +53,6 @@ public class Attack : MonoBehaviour
 
     private void OnAttack()
     {
-        Debug.Log("OnAttack");
         if (Hit(out Collider hit))
         {
             PhysicsDebug.DrawDebug(_bat.transform.position, _clevage, 0.3f);
@@ -64,7 +63,6 @@ public class Attack : MonoBehaviour
 
     private void OnAttackEnded()
     {
-        Debug.Log("OnAttackEnded");
         _currentAttackCoolDown = _attackCoolDown;
         _isAttacking = false;
     }

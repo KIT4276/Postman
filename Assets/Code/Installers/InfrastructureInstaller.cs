@@ -35,16 +35,16 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
         this.gameObject.SetActive(true);
         Container.BindInterfacesAndSelfTo<ICoroutineRunner>().FromInstance(this).AsSingle();
 
-       InstallSceneLoader();
+        InstallSceneLoader();
 
         BindFactories();
         BindServices();
 
         BindEnterPoint();
-        
+
     }
 
-   
+
 
     private void InstallAIDParent()
     {

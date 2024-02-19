@@ -5,9 +5,6 @@ using Zenject;
 
 public class GameFactory : IService
 {
-    [Inject]
-    private IAssets _assets;
-
     public event Action PlayerCreated;
 
     public GameObject PlayerGameObject { get; private set; }
@@ -17,11 +14,22 @@ public class GameFactory : IService
 
     private readonly EnemyFactory _enemyFactory;
     private readonly DeliveredParcelsCounter _counter;
+    private readonly Salary _salary;
+    private readonly Healing _healing;
+    private readonly IAssets _assets;
+    private readonly PersistantStaticData _staticData;
+    private readonly PersistantPlayerStaticData _playerStaticData;
 
-    public GameFactory(EnemyFactory enemyFactory, DeliveredParcelsCounter counter )
+    public GameFactory(EnemyFactory enemyFactory, IAssets assets, DeliveredParcelsCounter counter,
+        Salary salary, Healing healing, PersistantStaticData staticData, PersistantPlayerStaticData playerStaticData)
     {
         _enemyFactory = enemyFactory;
+        _assets = assets;
         _counter = counter;
+        _salary = salary;
+        _healing = healing;
+        _staticData = staticData;
+        _playerStaticData = playerStaticData;
     }
 
     public GameObject CreatePlayerAt(GameObject at, IInputService input)
@@ -29,6 +37,8 @@ public class GameFactory : IService
         PlayerGameObject = InstantiateRegistered(AssetPath.HeroPath, at.transform.position);
         PlayerGameObject.GetComponent<PlayerMove>().Init(input);
         PlayerGameObject.GetComponent<PlayerAttack>().Init(input);
+        PlayerGameObject.GetComponent<PlayerHealing>().SetHealing(_healing);
+        PlayerGameObject.GetComponent<PlayerInfection>().Init(_playerStaticData);
         PlayerCreated?.Invoke();
         return PlayerGameObject;
     }
@@ -37,7 +47,10 @@ public class GameFactory : IService
     {
         var hud = InstantiateRegistered(AssetPath.HUDPath);
         hud.GetComponent<EnemiesCount>().SetEnemyFactory(_enemyFactory);
+        hud.GetComponent<MoneyPanel>().SetSalary(_salary);
         hud.GetComponent<DeliveredParcelsPanel>().SetCounter(_counter);
+        hud.GetComponent<InfectionPanel>().SetInfection(PlayerGameObject.GetComponent<PlayerInfection>());
+        hud.GetComponent<HealButton>().Init(_salary, _healing, _staticData);
         return hud;
     }
 

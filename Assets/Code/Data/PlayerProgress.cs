@@ -3,18 +3,22 @@
 [Serializable]
 public class PlayerProgress
 {
-    public State HeroState;
+    public State PlayerState;
     public WorldData WorldData;
     public Stats PlayerStats;
     public KillData KillData;
     public PostData PostData;
+    public MoneyData MoneyData;
+    public InfectedData InfectedData;
 
     public PlayerProgress(string initialLevel)
     {
         WorldData = new WorldData(initialLevel);
-        HeroState = new State();
+        PlayerState = new State();
         PlayerStats = new Stats();
         KillData = new KillData();
         PostData = new PostData();
+        MoneyData = new MoneyData();
+        InfectedData = new InfectedData();
     }
 }

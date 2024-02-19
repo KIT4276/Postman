@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class Post
 {
     private string _postAddressID;
+
     private List<string> _addressesId = new List<string>();
 
     private Dictionary<string, AddressTrigger> _addressesDic = new Dictionary<string, AddressTrigger>();
