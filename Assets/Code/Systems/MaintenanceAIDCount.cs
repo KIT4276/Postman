@@ -8,7 +8,7 @@ public class MaintenanceAIDCount
     private readonly AIDFactory _aidFactory;
     private readonly PersistantStaticData _staticData;
 
-    private List<AIDSpawner> _spawners = new List<AIDSpawner>();
+    private readonly List<AIDSpawner> _spawners = new ();
 
     public MaintenanceAIDCount(AIDFactory aidFactory, PersistantStaticData staticData)
     {

@@ -5,12 +5,10 @@ using Zenject;
 
 public class EnemyFactory : IGameplayFactory
 {
-    [Inject]
-    private readonly Enemy.Pool _enemiesPool;
-    [Inject]
-    private readonly EntenemiesParent _parent;
+    [Inject] private readonly Enemy.Pool _enemiesPool;
+    [Inject] private readonly EntenemiesParent _parent;
 
-    public List<Enemy> Enemies { get; private set; }  = new List<Enemy>();
+    public List<Enemy> Enemies { get; private set; } = new List<Enemy>();
 
     public event Action ChangeEnemiesCount;
     public event Action DeadSumEnemyEvent;
@@ -21,7 +19,7 @@ public class EnemyFactory : IGameplayFactory
         enemy.NavMeshEnabled(true);
         Enemies.Add(enemy);
         enemy.transform.parent = _parent.transform;
-        
+
         enemy.transform.SetPositionAndRotation(spawnerTransform.position, spawnerTransform.rotation);
 
         ChangeEnemiesCount?.Invoke();

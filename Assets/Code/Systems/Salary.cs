@@ -5,7 +5,7 @@ public class Salary : ISavedProgress
     private readonly Post _post;
     private readonly PersistantStaticData _staticData;
 
-    private float _salaryAmount;
+    private readonly float _salaryAmount;
 
     public event Action ManyChangeE;
 

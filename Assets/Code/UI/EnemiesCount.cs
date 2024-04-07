@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class EnemiesCount : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI _text;
+    [SerializeField] private TextMeshProUGUI _text;
 
     private EnemyFactory _enemyFactory;
 
-    public void SetEnemyFactory(EnemyFactory enemyFactory) => 
+    public void SetEnemyFactory(EnemyFactory enemyFactory) =>
         _enemyFactory = enemyFactory;
 
     private void Start()
@@ -17,9 +16,9 @@ public class EnemiesCount : MonoBehaviour
         _enemyFactory.ChangeEnemiesCount += UpdateEnemy;
     }
 
-    private void UpdateEnemy() => 
+    private void UpdateEnemy() =>
         _text.text = _enemyFactory.GetEnemiesCount().ToString();
 
-    private void OnDestroy() => 
+    private void OnDestroy() =>
         _enemyFactory.ChangeEnemiesCount -= UpdateEnemy;
 }

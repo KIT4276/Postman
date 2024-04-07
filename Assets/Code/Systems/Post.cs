@@ -5,9 +5,9 @@ public class Post
 {
     private string _postAddressID;
 
-    private List<string> _addressesId = new List<string>();
+    private readonly List<string> _addressesId = new();
 
-    private Dictionary<string, AddressTrigger> _addressesDic = new Dictionary<string, AddressTrigger>();
+    private readonly Dictionary<string, AddressTrigger> _addressesDic = new();
 
     public event Action PostEnterE;
     public event Action AddressEnterE;

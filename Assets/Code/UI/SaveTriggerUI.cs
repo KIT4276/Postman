@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 
 public class SaveTriggerUI : MonoBehaviour
 {
-    [SerializeField]
-    private SaveTrigger _saveTrigger;
-    [SerializeField]
-    private TextMeshProUGUI _text;
-    [SerializeField]
-    private float _fadeTime = 6;
+    [SerializeField] private SaveTrigger _saveTrigger;
+    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private float _fadeTime = 6;
 
     private float _timer;
 
-    private void Start()
-    {
+    private void Start() =>
         _saveTrigger.PlayerEnter += ShowUI;
-    }
 
     private void ShowUI()
     {
@@ -29,7 +23,7 @@ public class SaveTriggerUI : MonoBehaviour
     {
         _timer = _fadeTime;
 
-        while (_timer > 0) 
+        while (_timer > 0)
         {
             _timer -= Time.deltaTime;
 
@@ -37,7 +31,7 @@ public class SaveTriggerUI : MonoBehaviour
 
             yield return null;
         }
-        
-        //_text.alpha = 0;
+
+        _text.alpha = 0;
     }
 }

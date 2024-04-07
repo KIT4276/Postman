@@ -5,8 +5,8 @@ using Zenject;
 
 public class AIDFactory : IGameplayFactory
 {
-    [Inject] private AIDTrigger.Pool _aidPool;
-    [Inject] private AIDParent _parent;
+    [Inject] private readonly AIDTrigger.Pool _aidPool;
+    [Inject] private readonly AIDParent _parent;
 
     public List<AIDTrigger> Aids { get; private set; } = new List<AIDTrigger>();
 
@@ -16,8 +16,7 @@ public class AIDFactory : IGameplayFactory
     {
         AIDTrigger aid = _aidPool.Spawn();
         Aids.Add(aid);
-        aid.transform.position = spawnTransform.position;
-        aid.transform.rotation = spawnTransform.rotation;
+        aid.transform.SetPositionAndRotation(spawnTransform.position, spawnTransform.rotation);
         aid.transform.parent = _parent.transform;
         aid.SetRecoveryHealth(value);
 

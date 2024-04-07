@@ -3,8 +3,7 @@ using Zenject;
 
 public class StateMachineInstaller : MonoInstaller
 {
-    [SerializeField]
-    private PersistantPlayerStaticData _persistantPlayerStaticData;
+    [SerializeField] private PersistantPlayerStaticData _persistantPlayerStaticData;
 
     public override void InstallBindings()
     {

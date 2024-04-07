@@ -8,7 +8,7 @@ public class MaintenanceEnemyesCount
     private readonly EnemyFactory _factory;
     private readonly PersistantStaticData _staticData;
 
-    private List<EnemySpawner> _spawners = new List<EnemySpawner>();
+    private readonly List<EnemySpawner> _spawners = new();
 
     public MaintenanceEnemyesCount(EnemyFactory enemyFactory, PersistantStaticData staticData)
     {

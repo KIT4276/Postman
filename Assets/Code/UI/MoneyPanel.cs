@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class MoneyPanel : MonoBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI _text;
+    [SerializeField] private TextMeshProUGUI _text;
 
     private Salary _salary;
 
@@ -17,7 +16,7 @@ public class MoneyPanel : MonoBehaviour
         _salary.ManyChangeE += AddMoney;
     }
 
-    private void AddMoney() => 
+    private void AddMoney() =>
         _text.text = _salary.Money.ToString();
 
     private void OnDestroy()

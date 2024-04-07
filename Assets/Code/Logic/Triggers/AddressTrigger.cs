@@ -3,14 +3,13 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(UniqId))]
-public class AddressTrigger : BaseTrigger 
+public class AddressTrigger : BaseTrigger
 {
-    [SerializeField]
-    protected UniqId _uniqId;
+    [SerializeField] protected UniqId _uniqId;
 
     public string Id { get => _uniqId.Id; }
 
-    public event Action<string> AddressTriggerEnter; 
+    public event Action<string> AddressTriggerEnter;
 
     protected void OnTriggerEnter(Collider other)
     {

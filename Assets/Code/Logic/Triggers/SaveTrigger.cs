@@ -2,10 +2,9 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class SaveTrigger :  BaseTrigger
+public class SaveTrigger : BaseTrigger
 {
-    [Inject]
-    private ISaveLoadService _saveLoadService;
+    [Inject] private readonly ISaveLoadService _saveLoadService;
 
     public event Action PlayerEnter;
 

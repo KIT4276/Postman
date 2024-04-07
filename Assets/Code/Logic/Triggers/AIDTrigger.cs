@@ -1,18 +1,14 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
 public class AIDTrigger : BaseTrigger
 {
-    [SerializeField]
     public class Pool : MonoMemoryPool<AIDTrigger> { }
 
-    [SerializeField]
-    private float _health;
+    [SerializeField] private float _health;
 
-    [Inject]
-    private AIDFactory _factory;
+    [Inject] private readonly AIDFactory _factory;
 
     public event Action OffAID;
 
@@ -27,7 +23,7 @@ public class AIDTrigger : BaseTrigger
         }
     }
 
-    public void SetRecoveryHealth(float value) => 
+    public void SetRecoveryHealth(float value) =>
         _health = value;
 }
 

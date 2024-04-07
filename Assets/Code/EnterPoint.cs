@@ -3,8 +3,7 @@ using Zenject;
 
 public class EnterPoint : MonoBehaviour
 {
-    [Inject]
-    DiContainer _container;
+    [Inject] private readonly DiContainer _container;
 
     private void Start()
     {

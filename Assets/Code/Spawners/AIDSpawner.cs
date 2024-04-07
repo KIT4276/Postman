@@ -3,15 +3,13 @@ using Zenject;
 
 public class AIDSpawner : Spawner
 {
-    [SerializeField]
-    private float _healthValue = 10;
+    [SerializeField] private float _healthValue = 10;
 
     private string _id;
     public bool _empty;
     private AIDTrigger _aid;
-    
-    [Inject]
-    private AIDFactory _factory;
+
+    [Inject] private readonly AIDFactory _factory;
 
     private void Awake() =>
         _id = GetComponent<UniqId>().Id;
@@ -32,7 +30,7 @@ public class AIDSpawner : Spawner
 
     private void Spawn()
     {
-        _aid  = _factory.SpawnAID(this.transform, _healthValue);
+        _aid = _factory.SpawnAID(this.transform, _healthValue);
         _aid.OffAID += OffAID;
     }
 

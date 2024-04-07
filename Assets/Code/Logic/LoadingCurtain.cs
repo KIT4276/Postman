@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class LoadingCurtain : MonoBehaviour
 {
-    [SerializeField]
-    private CanvasGroup Curtain;
+    [SerializeField] private CanvasGroup Curtain;
 
     public void Show()
     {

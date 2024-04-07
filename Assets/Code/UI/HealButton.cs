@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class HealButton : MonoBehaviour
 {
-    [SerializeField]
-    private float _healingPrice;// = 100; //remove to stats
+    [SerializeField] private float _healingPrice;
 
     private Salary _salary;
     private Healing _healing;
@@ -17,7 +16,7 @@ public class HealButton : MonoBehaviour
 
         _healingPrice = _staticData.HealingPrice;
     }
-    
+
     public void ToHeal()
     {
         _salary.ToSpand(_healingPrice);

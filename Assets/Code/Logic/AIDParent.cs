@@ -2,5 +2,4 @@
 
 public class AIDParent : MonoBehaviour
 {
-    private void Start() { }
 }

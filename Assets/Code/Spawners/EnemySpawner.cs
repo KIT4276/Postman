@@ -5,15 +5,13 @@ public class EnemySpawner : Spawner
 {
     public MonstersTypeId MonstersTypeId;
 
+    [SerializeField] private bool _slain;
+
     private string _id;
     private EnemyDeath _enemyDeath;
     private Enemy _enemy;
 
-    [SerializeField]
-    private bool _slain;
-
-    [Inject]
-    private readonly EnemyFactory _enemyFactory;
+    [Inject] private readonly EnemyFactory _enemyFactory;
 
     private void Awake() =>
         _id = GetComponent<UniqId>().Id;
@@ -50,7 +48,7 @@ public class EnemySpawner : Spawner
     {
         _slain = true;
         _enemy = null;
-        
+
         _enemyDeath.Happened -= DeadEnemy;
     }
 }
