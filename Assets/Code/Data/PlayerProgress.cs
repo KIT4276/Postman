@@ -10,6 +10,7 @@ public class PlayerProgress
     public PostData PostData;
     public MoneyData MoneyData;
     public InfectedData InfectedData;
+    public ExperienceData ExperienceData;
 
     public PlayerProgress(string initialLevel)
     {
@@ -20,5 +21,6 @@ public class PlayerProgress
         PostData = new PostData();
         MoneyData = new MoneyData();
         InfectedData = new InfectedData();
+        ExperienceData = new ExperienceData();
     }
 }

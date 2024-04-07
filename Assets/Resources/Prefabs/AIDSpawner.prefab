@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4496476520ff341894c8e324dda404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: Main_0a6b3b6c-fc13-4365-adb8-a134e4c22443
+  Id: AIDSpawner_11d0e8c7-888c-402b-8804-d64bcff5d4dd
 --- !u!114 &1354152257926891933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,4 +59,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthValue: 20
-  _off: 0
+  _empty: 0

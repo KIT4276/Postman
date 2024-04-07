@@ -9,6 +9,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     private float _current;
     [SerializeField]
     private float _max;
+    [SerializeField]
+    private ActorUI _actorUI;
 
     public float Current
     {
@@ -21,8 +23,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
         set => _max = value;
     }
 
-    public void Restart() =>
+    public void Restart()
+    {
         Current = Max;
+        _actorUI.Construct(this);
+    }
 
     public event Action HealthChanged;
 

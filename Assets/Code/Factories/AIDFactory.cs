@@ -5,10 +5,8 @@ using Zenject;
 
 public class AIDFactory : IGameplayFactory
 {
-    [Inject]
-    private AIDTrigger.Pool _aidPool;
-    [Inject]
-    private AIDParent _parent;
+    [Inject] private AIDTrigger.Pool _aidPool;
+    [Inject] private AIDParent _parent;
 
     public List<AIDTrigger> Aids { get; private set; } = new List<AIDTrigger>();
 

@@ -4,6 +4,7 @@ using Zenject;
 public class EnemySpawner : Spawner
 {
     public MonstersTypeId MonstersTypeId;
+
     private string _id;
     private EnemyDeath _enemyDeath;
     private Enemy _enemy;
@@ -12,7 +13,7 @@ public class EnemySpawner : Spawner
     private bool _slain;
 
     [Inject]
-    private EnemyFactory _enemyFactory;
+    private readonly EnemyFactory _enemyFactory;
 
     private void Awake() =>
         _id = GetComponent<UniqId>().Id;
@@ -49,6 +50,7 @@ public class EnemySpawner : Spawner
     {
         _slain = true;
         _enemy = null;
+        
         _enemyDeath.Happened -= DeadEnemy;
     }
 }

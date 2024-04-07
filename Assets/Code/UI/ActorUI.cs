@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public partial class ActorUI : MonoBehaviour
 {
     [SerializeField]
-    private HpBar HpBar;
+    private Bar HpBar;
 
     private IHealth _heroHealth;
 
@@ -17,15 +18,15 @@ public partial class ActorUI : MonoBehaviour
         _isSigned = true;
     }
 
-    private void Start() //remove it when we work with factories and spawn
-    {
-        IHealth health = GetComponent<IHealth>();
+    //private void Start() //remove it when we work with factories and spawn
+    //{
+    //    IHealth health = GetComponent<IHealth>();
 
-        if (health != null)
-            Construct(health);
-    }
+    //    if (health != null)
+    //        Construct(health);
+    //}
 
-    private void UpdateHpBar() =>
+    private void UpdateHpBar() => 
         HpBar.SetValue(_heroHealth.Current, _heroHealth.Max);
 
     private void OnDestroy()

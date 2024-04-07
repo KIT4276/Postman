@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class HpBar : MonoBehaviour
+public class Bar : MonoBehaviour
 {
-    public Image ImageCurrent;
+    [SerializeField] private Image ImageCurrent;
 
     public void SetValue(float current, float max) =>
         ImageCurrent.fillAmount = current / max;

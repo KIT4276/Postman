@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private EnemyHealth _enemyHealth;
     [SerializeField]
-    private HpBar _hpBar;
+    private Bar _hpBar;
     [SerializeField]
     private EnemyAnimator _animator;
     [SerializeField]

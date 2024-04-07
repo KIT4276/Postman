@@ -162,7 +162,7 @@ MonoBehaviour:
   _aidPrefab: {fileID: 8693990690450267588, guid: a4ec936bc0a3d6f4393a17151d118c10, type: 3}
   _entenemiesParentPrefab: {fileID: 4183527311121313293, guid: 474e19b72064b5f4aadfa3ac42ae695c, type: 3}
   _aidParentPrefab: {fileID: 1603375342333871807, guid: 315c3b9c741676e4b9a6f71ff5866266, type: 3}
-  _EnemyesPoolCount: 20
+  _enemyesPoolCount: 20
 --- !u!1 &8216127234893350899
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,6 +208,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _persistantStaticData: {fileID: 11400000, guid: 6b2e40815dc4a9845ab22d2e4b56b057, type: 2}
+  _targetXP: 100
+  _xpIncreaseStep: 10
+  _xpForDeliver: 30
+  _xpForKilling: 25
 --- !u!1 &8733115800262074655
 GameObject:
   m_ObjectHideFlags: 0

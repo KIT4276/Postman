@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 public class GameFactory : IService
 {
@@ -19,9 +18,11 @@ public class GameFactory : IService
     private readonly IAssets _assets;
     private readonly PersistantStaticData _staticData;
     private readonly PersistantPlayerStaticData _playerStaticData;
+    private readonly Experience _experience;
 
     public GameFactory(EnemyFactory enemyFactory, IAssets assets, DeliveredParcelsCounter counter,
-        Salary salary, Healing healing, PersistantStaticData staticData, PersistantPlayerStaticData playerStaticData)
+        Salary salary, Healing healing, PersistantStaticData staticData, PersistantPlayerStaticData playerStaticData, 
+        Experience experience)
     {
         _enemyFactory = enemyFactory;
         _assets = assets;
@@ -30,6 +31,7 @@ public class GameFactory : IService
         _healing = healing;
         _staticData = staticData;
         _playerStaticData = playerStaticData;
+        _experience = experience;
     }
 
     public GameObject CreatePlayerAt(GameObject at, IInputService input)
@@ -51,15 +53,14 @@ public class GameFactory : IService
         hud.GetComponent<DeliveredParcelsPanel>().SetCounter(_counter);
         hud.GetComponent<InfectionPanel>().SetInfection(PlayerGameObject.GetComponent<PlayerInfection>());
         hud.GetComponent<HealButton>().Init(_salary, _healing, _staticData);
+        hud.GetComponent<ExperienceUI>().Init(_experience);
+        hud.GetComponent<ActorUI>().Construct(PlayerGameObject.GetComponent<PlayerHealth>());
+        Register(_experience);
         return hud;
     }
 
-    public StartMenu CreateStartMenu()
-    {
-        var menu = _assets.Instantiate(AssetPath.StartMenuPath);
-       
-        return menu.GetComponent<StartMenu>();
-    }
+    public StartMenu CreateStartMenu() =>
+        _assets.Instantiate(AssetPath.StartMenuPath).GetComponent<StartMenu>();
 
     public void CleanUp()
     {

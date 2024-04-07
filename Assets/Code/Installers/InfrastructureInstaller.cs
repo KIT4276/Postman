@@ -1,23 +1,16 @@
-using System;
 using UnityEngine;
 using Zenject;
 
 public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
 {
-    [SerializeField]
-    private GameObject _curtainPrefab;
-    [SerializeField]
-    private GameObject _enterPointPrefab;
-    [SerializeField]
-    private GameObject _enemyPrefab;
-    [SerializeField]
-    private GameObject _aidPrefab;
-    [SerializeField]
-    private GameObject _entenemiesParentPrefab;
-    [SerializeField]
-    private GameObject _aidParentPrefab;
-    [SerializeField]
-    private int _EnemyesPoolCount = 20;
+    [SerializeField] private GameObject _curtainPrefab;
+    [SerializeField] private GameObject _enterPointPrefab;
+    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject _aidPrefab;
+    [SerializeField] private GameObject _entenemiesParentPrefab;
+    [SerializeField] private GameObject _aidParentPrefab;
+    [SerializeField] private int _enemyesPoolCount = 20;
+   
 
     private const string Curtain = "Curtain";
     private const string Infrastructure = "Infrastructure";
@@ -42,8 +35,8 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
 
         BindEnterPoint();
 
+        
     }
-
 
 
     private void InstallAIDParent()
@@ -63,7 +56,6 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
         Container.BindInterfacesAndSelfTo<EnterPoint>().FromComponentInNewPrefab(_enterPointPrefab).
             WithGameObjectName(EnterPoint).UnderTransformGroup(Infrastructure).AsSingle().NonLazy();
     }
-
 
 
     private void InstallInputService()
@@ -87,7 +79,7 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
     private void BindFactories()
     {
         Container.Bind<EnemyFactory>().AsSingle();
-        Container.BindMemoryPool<Enemy, Enemy.Pool>().WithInitialSize(_EnemyesPoolCount).FromComponentInNewPrefab(_enemyPrefab);
+        Container.BindMemoryPool<Enemy, Enemy.Pool>().WithInitialSize(_enemyesPoolCount).FromComponentInNewPrefab(_enemyPrefab);
 
         Container.Bind<AIDFactory>().AsSingle();
         Container.BindMemoryPool<AIDTrigger, AIDTrigger.Pool>().FromComponentInNewPrefab(_aidPrefab);
