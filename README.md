@@ -4,7 +4,8 @@
  <h3>Task:</h3>
 <p>Deliver packages without being killed by zombies and without dying from infection</p>
 
-<br><a href="https://drive.google.com/file/d/1SCBgRyZrXjXFVe1PbejAAbFg-m5piQmA/view?usp=sharing">Link to a build</a></h2>
+<a href="https://drive.google.com/file/d/1SCBgRyZrXjXFVe1PbejAAbFg-m5piQmA/view?usp=sharing">Link to a build</a></h2><br>
+<a href="https://drive.google.com/file/d/1FFFYRmwOW_A4m3qMvx6Zg5T77ONsXY1y/view?usp=sharing">Link to a video</a></h2>
 
  <h3> Platform:</h3>
  Android
