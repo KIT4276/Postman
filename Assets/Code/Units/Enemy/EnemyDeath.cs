@@ -24,10 +24,13 @@ public class EnemyDeath : Death
     public event Action Happened;
 
     private void Start() =>
-        Health.HealthChanged += HealthChanged;
+        SubscribeToHealth();
 
     public void Restart() =>
-        Health.HealthChanged += HealthChanged;
+        SubscribeToHealth();
+
+    private void OnDisable() =>
+        Health.HealthChanged -= HealthChanged;
 
     private void OnDestroy() =>
         Health.HealthChanged -= HealthChanged;
@@ -44,6 +47,12 @@ public class EnemyDeath : Death
 
         Animator.PlayDeath();
         Agent.enabled = false;
+    }
+
+    private void SubscribeToHealth()
+    {
+        Health.HealthChanged -= HealthChanged;
+        Health.HealthChanged += HealthChanged;
     }
 
     protected override void OnDead()

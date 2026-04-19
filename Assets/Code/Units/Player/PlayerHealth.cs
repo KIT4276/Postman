@@ -7,32 +7,33 @@ public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
     [SerializeField]
     private PlayerAnimator _animator;
 
-    private State _state;
+    private State _state = new();
 
     public event Action HealthChanged;
     public event Action GetHit;
 
     public float Current
     {
-        get => _state.CurrentHP;
+        get => State.CurrentHP;
         set
         {
-            if (_state.CurrentHP != value)
+            if (State.CurrentHP != value)
             {
-                _state.CurrentHP = value;
+                State.CurrentHP = value;
                 HealthChanged?.Invoke();
             }
         }
     }
     public float Max
     {
-        get => _state.MaxHP;
-        set => _state.MaxHP = value;
+        get => State.MaxHP;
+        set => State.MaxHP = value;
     }
 
     public void LoadProgress(PlayerProgress progress)
     {
-        _state = progress.PlayerState;
+        _state = progress.PlayerState ?? new State();
+        progress.PlayerState = _state;
         HealthChanged?.Invoke();
     }
 
@@ -58,4 +59,6 @@ public class PlayerHealth : MonoBehaviour, IHealth, ISavedProgress
         }
 
     }
+
+    private State State => _state ??= new State();
 }

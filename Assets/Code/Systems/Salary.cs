@@ -26,10 +26,15 @@ public class Salary : ISavedProgress
         ManyChangeE?.Invoke();
     }
 
+    public void AddMoney(float value)
+    {
+        Money += value;
+        ManyChangeE?.Invoke();
+    }
+
     private void SalaryPayment()
     {
-        Money += _salaryAmount;
-        ManyChangeE?.Invoke();
+        AddMoney(_salaryAmount);
     }
 
 

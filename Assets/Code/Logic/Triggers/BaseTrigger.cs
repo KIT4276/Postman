@@ -3,6 +3,13 @@
 [RequireComponent(typeof(Collider))]
 public class BaseTrigger : MonoBehaviour
 {
-    public void Awake() => 
-        GetComponent<Collider>().isTrigger = true;
+    [SerializeField] private Collider _collider;
+
+    public void Awake()
+    {
+        if (_collider == null)
+            _collider = GetComponent<Collider>();
+
+        _collider.isTrigger = true;
+    }
 }

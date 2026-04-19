@@ -10,11 +10,15 @@ public class EnemySpawner : Spawner
     private string _id;
     private EnemyDeath _enemyDeath;
     private Enemy _enemy;
+    private UniqId _uniqId;
 
     [Inject] private readonly EnemyFactory _enemyFactory;
 
-    private void Awake() =>
-        _id = GetComponent<UniqId>().Id;
+    private void Awake()
+    {
+        _uniqId = GetComponent<UniqId>();
+        _id = _uniqId.Id;
+    }
 
     public override void LoadProgress(PlayerProgress progress)
     {

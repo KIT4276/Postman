@@ -12,9 +12,18 @@ public class CheckAttackRange : MonoBehaviour
 
     public void Restart()
     {
+        TriggerObserver.TriggerEnter -= TriggerEnter;
+        TriggerObserver.TriggerExit -= TriggerExit;
         TriggerObserver.TriggerEnter += TriggerEnter;
         TriggerObserver.TriggerExit += TriggerExit;
 
+        Attack.DisableAttack();
+    }
+
+    private void OnDisable()
+    {
+        TriggerObserver.TriggerEnter -= TriggerEnter;
+        TriggerObserver.TriggerExit -= TriggerExit;
         Attack.DisableAttack();
     }
 

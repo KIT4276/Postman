@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using Zenject;
 
-public class StateMachine
+public class StateMachine : IInitializable
 {
     private readonly StateFactory _stateFactory;
 
@@ -10,13 +11,13 @@ public class StateMachine
     private IExitableState _activeState;
     private bool _isInited;
 
-    public StateMachine(StateFactory stateFactory) => 
+    public StateMachine(StateFactory stateFactory) =>
         _stateFactory = stateFactory;
 
     public void Initialize()
     {
         if (_isInited) return;
-        
+
         _states = new Dictionary<Type, IExitableState>
         {
             [typeof(BootstrapState)] = _stateFactory
@@ -55,5 +56,5 @@ public class StateMachine
     }
 
     private TState GetState<TState>() where TState : class, IExitableState =>
-         _states[typeof(TState)] as TState;
+        _states[typeof(TState)] as TState;
 }

@@ -2,49 +2,46 @@
 
 public class Experience : ISavedProgress
 {
+    private const float MilestoneReward = 100;
+
     public event Action<float, float> ChangeExperienceValue;
-    public event Action<float> ChangeExperienceLevel;
+    public event Action<float> ChangeMilestone;
 
     public float ExperienceValue { get; private set; }
-    public float ExperienceLevel { get; private set; }
+    public float Milestone { get; private set; }
     public float TargetXP { get; private set; }
 
     private readonly int _xpIncreaseStep;
-    private readonly float _xpForDeliver;
     private readonly float _xpForKilling;
+    private readonly Salary _salary;
 
-    public Experience(float targetXP, int xpIncreaseStep, int xpForDeliver, int xpForKilling, EnemyFactory enemyFactory, 
-        DeliveredParcelsCounter parcelsCounter)
+    public Experience(float targetXP, int xpIncreaseStep, int xpForKilling, EnemyFactory enemyFactory, Salary salary)
     {
         TargetXP = targetXP;
         _xpIncreaseStep = xpIncreaseStep;
-        _xpForDeliver = xpForDeliver;
         _xpForKilling = xpForKilling;
+        _salary = salary;
 
-        parcelsCounter.ChangeCount += CangeXPForDeliver;
         enemyFactory.DeadSumEnemyEvent += CangeXPForKilling;
     }
 
     public void UpdateProgress(PlayerProgress progress)
     {
         progress.ExperienceData.ExperienceValue = ExperienceValue;
-        progress.ExperienceData.ExperienceLevel = ExperienceLevel;
+        progress.ExperienceData.Milestone = Milestone;
     }
 
     public void LoadProgress(PlayerProgress progress)
     {
         ExperienceValue = progress.ExperienceData.ExperienceValue;
-        ExperienceLevel = progress.ExperienceData.ExperienceLevel;
+        Milestone = progress.ExperienceData.Milestone;
 
-        ChangeExperienceLevel?.Invoke(ExperienceLevel);
+        ChangeMilestone?.Invoke(Milestone);
         ChangeExperienceValue?.Invoke(ExperienceValue, TargetXP);
     }
 
     private void CangeXPForKilling() => 
         CangeXP(_xpForKilling);
-
-    private void CangeXPForDeliver() => 
-        CangeXP(_xpForDeliver);
 
     private void CangeXP(float value)
     {
@@ -52,10 +49,11 @@ public class Experience : ISavedProgress
 
         if (ExperienceValue >= TargetXP)
         {
-            ExperienceLevel++;
+            Milestone++;
             ExperienceValue = 0;
             TargetXP +=  TargetXP * _xpIncreaseStep /100;
-            ChangeExperienceLevel?.Invoke(ExperienceLevel);
+            _salary.AddMoney(MilestoneReward);
+            ChangeMilestone?.Invoke(Milestone);
         }
 
         ChangeExperienceValue?.Invoke(ExperienceValue, TargetXP);

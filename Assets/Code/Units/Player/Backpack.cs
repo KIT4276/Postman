@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class Backpack : MonoBehaviour
 {
@@ -7,9 +7,9 @@ public class Backpack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PostAddressTrigger>() != null)
+        if (other.TryGetComponent<PostAddressTrigger>(out _))
             _backpack.SetActive(true);
-        else if(other.GetComponent<AddressTrigger>() != null)
+        else if (other.TryGetComponent<AddressTrigger>(out _))
             _backpack.SetActive(false);
     }
 }

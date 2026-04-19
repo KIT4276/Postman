@@ -19,9 +19,11 @@ public class MaintenanceEnemyesCount
 
     public void SetSpawners()
     {
-        if (GameObject.FindGameObjectsWithTag(EnemySpawnerTag) != null)
-            foreach (var spawner in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
-                _spawners.Add(spawner.GetComponent<EnemySpawner>());
+        foreach (GameObject spawnerObject in GameObject.FindGameObjectsWithTag(EnemySpawnerTag))
+        {
+            if (spawnerObject.TryGetComponent<EnemySpawner>(out EnemySpawner spawner))
+                _spawners.Add(spawner);
+        }
     }
 
     private void CheckEnemiesCount()

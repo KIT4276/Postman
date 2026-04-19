@@ -7,7 +7,6 @@ public class GameplayInstaller : MonoInstaller
 
     [SerializeField] private float _targetXP = 100;
     [SerializeField] private int _xpIncreaseStep = 10;
-    [SerializeField] private int _xpForDeliver = 20;
     [SerializeField] private int _xpForKilling = 10;
 
     public override void InstallBindings()
@@ -24,6 +23,7 @@ public class GameplayInstaller : MonoInstaller
         InstallMaintenanceAIDCount();
 
         InstallHealing();
+        InstallRewardedAds();
 
         BindExperience();
     }
@@ -31,13 +31,16 @@ public class GameplayInstaller : MonoInstaller
 
     private void BindExperience() =>
         Container.BindInterfacesAndSelfTo<Experience>().FromNew().AsSingle().
-        WithArguments(_targetXP, _xpIncreaseStep, _xpForDeliver, _xpForKilling).NonLazy();
+        WithArguments(_targetXP, _xpIncreaseStep, _xpForKilling).NonLazy();
 
     private void InstallScriptableObjects() =>
         Container.Bind<PersistantStaticData>().FromInstance(_persistantStaticData).AsSingle().NonLazy();
 
     private void InstallHealing() =>
         Container.BindInterfacesAndSelfTo<Healing>().FromNew().AsSingle().NonLazy();
+
+    private void InstallRewardedAds() =>
+        Container.Bind<IRewardedAdService>().To<RewardedAdService>().AsSingle().NonLazy();
 
     private void InstallSalary() =>
         Container.BindInterfacesAndSelfTo<Salary>().FromNew().AsSingle().NonLazy();

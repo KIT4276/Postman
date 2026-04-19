@@ -4,7 +4,6 @@ using Zenject;
 public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
 {
     [SerializeField] private GameObject _curtainPrefab;
-    [SerializeField] private GameObject _enterPointPrefab;
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private GameObject _aidPrefab;
     [SerializeField] private GameObject _entenemiesParentPrefab;
@@ -14,7 +13,6 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
 
     private const string Curtain = "Curtain";
     private const string Infrastructure = "Infrastructure";
-    private const string EnterPoint = "EnterPoint";
     private const string Entenemies = "Entenemies";
     private const string Gameplay = "Gameplay";
     private const string AIDs = "AIDs";
@@ -32,10 +30,6 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
 
         BindFactories();
         BindServices();
-
-        BindEnterPoint();
-
-        
     }
 
 
@@ -51,13 +45,6 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
             WithGameObjectName(Entenemies).UnderTransformGroup(Gameplay).AsSingle().NonLazy();
     }
 
-    private void BindEnterPoint()
-    {
-        Container.BindInterfacesAndSelfTo<EnterPoint>().FromComponentInNewPrefab(_enterPointPrefab).
-            WithGameObjectName(EnterPoint).UnderTransformGroup(Infrastructure).AsSingle().NonLazy();
-    }
-
-
     private void InstallInputService()
     {
         IInputService input = DefineInputService();
@@ -71,6 +58,14 @@ public class InfrastructureInstaller : MonoInstaller, ICoroutineRunner
     {
         Container.BindInterfacesAndSelfTo<LoadingCurtain>().FromComponentInNewPrefab(_curtainPrefab).
             WithGameObjectName(Curtain).UnderTransformGroup(Infrastructure).AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<YandexPlatform>()
+            .FromNewComponentOnNewGameObject()
+            .WithGameObjectName("YandexPlatform")
+            .UnderTransformGroup(Infrastructure)
+            .AsSingle()
+            .NonLazy();
+        Container.Bind<ILocalizationService>().To<LocalizationService>().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<YandexService>().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<AssetsProvider>().FromNew().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<PersistantProgressService>().FromNew().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<SaveLoadService>().FromNew().AsSingle().NonLazy();

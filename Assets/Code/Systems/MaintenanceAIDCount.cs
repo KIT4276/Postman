@@ -19,8 +19,11 @@ public class MaintenanceAIDCount
 
     public void SetSpawners()
     {
-        foreach (var spawner in GameObject.FindGameObjectsWithTag(AIDSpawnerTag))
-            _spawners.Add(spawner.GetComponent<AIDSpawner>());
+        foreach (GameObject spawnerObject in GameObject.FindGameObjectsWithTag(AIDSpawnerTag))
+        {
+            if (spawnerObject.TryGetComponent<AIDSpawner>(out AIDSpawner spawner))
+                _spawners.Add(spawner);
+        }
     }
 
     private void CheckAIDCount()

@@ -24,14 +24,27 @@ public class PlayerAttack : MonoBehaviour, ISavedProgressReader
 
     private void Update()
     {
-        if (_input.IsAttackButtonUp())// && HeroAnimator.IsAttacking)  пока не разберёмся с изменением State у HeroAnimator
-            _playerAnimator.PlayAttack();
+        if (_input != null && _input.IsAttackButtonUp())
+            Attack();
+    }
+
+    public void Attack()
+    {
+        if (!isActiveAndEnabled)
+            return;
+
+        _playerAnimator.PlayAttack();
     }
 
     private void OnAttack()
     {
         for (int i = 0; i < Hit(); i++)
-            _hits[i].transform.parent.GetComponent<IHealth>().ChangeHealth(-_stats.Damage);
+        {
+            Transform targetRoot = _hits[i].transform.parent;
+
+            if (targetRoot != null && targetRoot.TryGetComponent<IHealth>(out IHealth health))
+                health.ChangeHealth(-_stats.Damage);
+        }
     }
 
     private void OnAttackEnded()

@@ -35,14 +35,12 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private CheckAttackRange _checkAttackRAnge;
 
-    private void Start() => 
-        _enemyDeath.Happened += Death;
-
     public void NavMeshEnabled(bool value) =>
         _agent.enabled = value;
 
     public void Restart()
     {
+        _enemyDeath.Happened -= Death;
         _enemyDeath.Happened += Death;
 
         _enemyHealth.Restart();
@@ -56,6 +54,6 @@ public class Enemy : MonoBehaviour
     private void Death() => 
         _aggro.End();
 
-    private void OnDisable() => 
+    private void OnDisable() =>
         _enemyDeath.Happened -= Death;
 }

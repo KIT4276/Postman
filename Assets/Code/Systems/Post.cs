@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 public class Post
@@ -14,13 +14,13 @@ public class Post
 
     public void SetAddress(AddressTrigger address)
     {
-        if (address.GetComponent<PostAddressTrigger>() != null)
+        if (address.TryGetComponent<PostAddressTrigger>(out _))
             _postAddressID = address.Id;
         else
         {
             _addressesId.Add(address.Id);
-
         }
+
         _addressesDic.Add(address.Id, address);
 
         address.AddressTriggerEnter += OnAddressEnter;

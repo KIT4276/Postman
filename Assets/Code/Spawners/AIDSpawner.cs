@@ -8,11 +8,15 @@ public class AIDSpawner : Spawner
     private string _id;
     public bool _empty;
     private AIDTrigger _aid;
+    private UniqId _uniqId;
 
     [Inject] private readonly AIDFactory _factory;
 
-    private void Awake() =>
-        _id = GetComponent<UniqId>().Id;
+    private void Awake()
+    {
+        _uniqId = GetComponent<UniqId>();
+        _id = _uniqId.Id;
+    }
 
     public void SpawnIfEmpty()
     {

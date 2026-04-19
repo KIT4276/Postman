@@ -16,6 +16,7 @@ public class EnemyFactory : IGameplayFactory
     public Enemy SpawnEnemy(Transform spawnerTransform)
     {
         Enemy enemy = _enemiesPool.Spawn();
+
         enemy.NavMeshEnabled(true);
         Enemies.Add(enemy);
         enemy.transform.parent = _parent.transform;
@@ -24,7 +25,6 @@ public class EnemyFactory : IGameplayFactory
 
         ChangeEnemiesCount?.Invoke();
         enemy.Restart();
-        enemy.GetComponent<EnemyDeath>().Happened += DeadEnemy;
         return enemy;
     }
 
@@ -34,11 +34,9 @@ public class EnemyFactory : IGameplayFactory
         Enemies.Remove(enemy);
         enemy.NavMeshEnabled(false);
         ChangeEnemiesCount?.Invoke();
+        DeadSumEnemyEvent?.Invoke();
     }
 
     public int GetEnemiesCount()
         => Enemies.Count;
-
-    private void DeadEnemy()
-        => DeadSumEnemyEvent?.Invoke();
 }

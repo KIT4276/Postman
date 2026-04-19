@@ -30,8 +30,19 @@ public class Aggro : MonoBehaviour
 
     public void Restart()
     {
+        TriggerObserver.TriggerEnter -= TriggerEnter;
+        TriggerObserver.TriggerExit -= TriggerExit;
         TriggerObserver.TriggerEnter += TriggerEnter;
         TriggerObserver.TriggerExit += TriggerExit;
+    }
+
+    private void OnDisable()
+    {
+        TriggerObserver.TriggerEnter -= TriggerEnter;
+        TriggerObserver.TriggerExit -= TriggerExit;
+        StopAggroCoroutine();
+        SwitchFollow(false);
+        _hasAggroTArget = false;
     }
 
     private void TriggerEnter(Collider obj)

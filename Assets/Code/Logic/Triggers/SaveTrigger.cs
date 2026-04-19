@@ -10,7 +10,7 @@ public class SaveTrigger : BaseTrigger
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>() != null)
+        if (other.TryGetComponent<Player>(out _))
         {
             _saveLoadService.SaveProgress();
             PlayerEnter?.Invoke();

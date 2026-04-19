@@ -80,12 +80,16 @@ public class LoadLevelState : IPayloadedState<string>
 
     private void InitAddressTriggers()
     {
-        if (GameObject.FindGameObjectsWithTag(AddressTag) != null)
+        GameObject[] addresses = GameObject.FindGameObjectsWithTag(AddressTag);
+
+        if (addresses.Length > 0)
         {
-            foreach (var address in GameObject.FindGameObjectsWithTag(AddressTag))
+            foreach (GameObject addressObject in addresses)
             {
-                _addresses.SetAddress(address.GetComponent<AddressTrigger>());
+                if (addressObject.TryGetComponent<AddressTrigger>(out AddressTrigger address))
+                    _addresses.SetAddress(address);
             }
+
             _gameFactory.Register(_counter);
             _gameFactory.Register(_salary);
             _parcelGenerator.StartGenerate();
@@ -94,28 +98,31 @@ public class LoadLevelState : IPayloadedState<string>
 
     private void InitSpawners()
     {
-        if (GameObject.FindGameObjectsWithTag(EnemySpawnerTag) != null)
-            Init(EnemySpawnerTag);
+        GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag(EnemySpawnerTag);
+        if (enemySpawners.Length > 0)
+            Init(enemySpawners);
 
-        if (GameObject.FindGameObjectsWithTag(AIDSpawnerTAg) != null)
-            Init(AIDSpawnerTAg);
+        GameObject[] aidSpawners = GameObject.FindGameObjectsWithTag(AIDSpawnerTAg);
+        if (aidSpawners.Length > 0)
+            Init(aidSpawners);
     }
 
-    private void Init(string tag)
+    private void Init(GameObject[] spawnerObjects)
     {
-        foreach (GameObject spawnerObject in GameObject.FindGameObjectsWithTag(tag))
+        foreach (GameObject spawnerObject in spawnerObjects)
         {
-            var spawner = spawnerObject.GetComponent<Spawner>();
-            _gameFactory.Register(spawner);
+            if (spawnerObject.TryGetComponent<Spawner>(out Spawner spawner))
+                _gameFactory.Register(spawner);
         }
     }
 
     private GameObject InitPlayer() =>
         _gameFactory.CreatePlayerAt(GameObject.FindWithTag(InitialPointTag), _input);
 
-    private void InitHud(GameObject player) => 
-        _gameFactory.CreateHud().GetComponentInChildren<ActorUI>().Construct(player.GetComponent<PlayerHealth>());
-
+    private void InitHud(GameObject player) 
+    { 
+        _gameFactory.CreateHud();
+    }
     private void CameraFollow(GameObject player) =>
         Camera.main.GetComponent<CameraFollow>().Follow(player.transform);
 }

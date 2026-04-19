@@ -7,11 +7,20 @@ public class MoneyPanel : MonoBehaviour
 
     private Salary _salary;
 
+    private void Awake()
+    {
+        if (_text == null)
+            _text = FindChildText("Coins_back");
+    }
+
     public void SetSalary(Salary salary) =>
         _salary = salary;
 
     private void Start()
     {
+        if (_salary == null || _text == null)
+            return;
+
         AddMoney();
         _salary.ManyChangeE += AddMoney;
     }
@@ -21,6 +30,16 @@ public class MoneyPanel : MonoBehaviour
 
     private void OnDestroy()
     {
-        _salary.ManyChangeE -= AddMoney;
+        if (_salary != null)
+            _salary.ManyChangeE -= AddMoney;
+    }
+
+    private TextMeshProUGUI FindChildText(string parentName)
+    {
+        foreach (Transform child in GetComponentsInChildren<Transform>(true))
+            if (child.name == parentName)
+                return child.GetComponentInChildren<TextMeshProUGUI>(true);
+
+        return null;
     }
 }
