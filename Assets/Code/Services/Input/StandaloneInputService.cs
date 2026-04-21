@@ -6,6 +6,9 @@ public class StandaloneInputService : InputService
     {
         get
         {
+            if (!IsEnabled)
+                return Vector2.zero;
+
             Vector2 axis = SimpleInputAxis();
 
             if (axis == Vector2.zero)

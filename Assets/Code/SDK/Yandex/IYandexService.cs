@@ -3,6 +3,8 @@ using System;
 public interface IYandexService
 {
     event Action SdkReady;
+    event Action GameApiPaused;
+    event Action GameApiResumed;
 
     bool HasPlayer { get; }
     bool IsSdkReady { get; }

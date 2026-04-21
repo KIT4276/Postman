@@ -8,6 +8,7 @@ mergeInto(LibraryManager.library, {
                 ysdk: null,
                 player: null,
                 initialized: false,
+                pauseResumeSubscribed: false,
                 send: null
             };
 
@@ -40,8 +41,27 @@ mergeInto(LibraryManager.library, {
 
             bridge.send = send;
 
+            function installPauseResumeHandlers() {
+                if (!bridge.ysdk || !bridge.ysdk.on || bridge.pauseResumeSubscribed) {
+                    return;
+                }
+
+                bridge.pauseCallback = function () {
+                    bridge.send("OnGameApiPause", "");
+                };
+
+                bridge.resumeCallback = function () {
+                    bridge.send("OnGameApiResume", "");
+                };
+
+                bridge.ysdk.on("game_api_pause", bridge.pauseCallback);
+                bridge.ysdk.on("game_api_resume", bridge.resumeCallback);
+                bridge.pauseResumeSubscribed = true;
+            }
+
             if (bridge.initialized) {
                 var cachedLang = "en";
+                installPauseResumeHandlers();
                 send("OnYsdkInitOk", "");
 
                 if (bridge.ysdk &&
@@ -67,6 +87,7 @@ mergeInto(LibraryManager.library, {
 
                     bridge.ysdk = ysdk;
                     bridge.initialized = true;
+                    installPauseResumeHandlers();
 
                     send("OnYsdkInitOk", "");
 

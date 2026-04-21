@@ -19,6 +19,7 @@ public class SaveLoadService : ISaveLoadService
             progressWriter.UpdateProgress(_progressService.Progress);
 
         PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
+        PlayerPrefs.Save();
     }
 
     public PlayerProgress LoadProgress() =>

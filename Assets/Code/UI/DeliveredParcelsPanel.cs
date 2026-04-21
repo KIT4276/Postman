@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class DeliveredParcelsPanel : MonoBehaviour
 {
+    [SerializeField] private string _prefix = "Доставлено ";
     [SerializeField] private TextMeshProUGUI _text;
 
     private DeliveredParcelsCounter _counter;
@@ -26,7 +27,7 @@ public class DeliveredParcelsPanel : MonoBehaviour
     }
 
     private void UpdateCount() =>
-        _text.text = _counter.DeliveredParcelsCount.ToString();
+        _text.text = _prefix + _counter.DeliveredParcelsCount.ToString();
 
     private void OnDestroy()
     {

@@ -34,6 +34,7 @@ public class BootstrapState : IState
     {
         InstallStartMenu();
         _curtain.Hide();
+        _yandexService.ReadyOnce();
     }
 
     private void InstallStartMenu() =>

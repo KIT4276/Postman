@@ -2,5 +2,5 @@
 
 public class MobileInputService : InputService
 {
-    public override Vector2 Axis => SimpleInputAxis();
+    public override Vector2 Axis => IsEnabled ? SimpleInputAxis() : Vector2.zero;
 }

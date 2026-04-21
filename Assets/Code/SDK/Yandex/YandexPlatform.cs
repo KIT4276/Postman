@@ -17,6 +17,8 @@ public class YandexPlatform : MonoBehaviour
     public event Action RvClosed;
     public event Action RvFailed;
     public event Action<string> LanguageDetected;
+    public event Action GameApiPaused;
+    public event Action GameApiResumed;
 
     public void Init()
     {
@@ -104,6 +106,8 @@ public class YandexPlatform : MonoBehaviour
     public void OnRvOpen(string _) => RvOpened?.Invoke();
     public void OnRvReward(string _) => RvRewarded?.Invoke();
     public void OnRvClose(string _) => RvClosed?.Invoke();
+    public void OnGameApiPause(string _) => GameApiPaused?.Invoke();
+    public void OnGameApiResume(string _) => GameApiResumed?.Invoke();
 
     public void OnRvError(string error)
     {

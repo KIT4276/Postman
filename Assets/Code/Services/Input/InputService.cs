@@ -6,10 +6,12 @@ public abstract class InputService : IInputService
     protected const string Horizontal = "Horizontal";
     protected const string Vertical = "Vertical";
 
+    public bool IsEnabled { get; set; } = true;
+
     public abstract Vector2 Axis { get; }
 
     public bool IsAttackButtonUp()=>
-        SimpleInput.GetButtonUp(FireButton);
+        IsEnabled && SimpleInput.GetButtonUp(FireButton);
 
     protected static Vector2 SimpleInputAxis()=>
         new Vector2(SimpleInput.GetAxis(Horizontal), SimpleInput.GetAxis(Vertical));

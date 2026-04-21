@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script src="/sdk.js"></script>
-    <title>{{{ PRODUCT_NAME }}}</title>
+    <title>Postman</title>
     <style>
       html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #111; }
       #unity-container { width: 100%; height: 100%; }
@@ -66,15 +66,15 @@
       var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       var maxDevicePixelRatio = isMobile ? 1.25 : 1.5;
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      var loaderUrl = buildUrl + "/003.loader.js";
       var config = {
-        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
-        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
-        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+        dataUrl: buildUrl + "/003.data.gz",
+        frameworkUrl: buildUrl + "/003.framework.js.gz",
+        codeUrl: buildUrl + "/003.wasm.gz",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "{{{ COMPANY_NAME }}}",
-        productName: "{{{ PRODUCT_NAME }}}",
-        productVersion: "{{{ PRODUCT_VERSION }}}",
+        companyName: "DefaultCompany",
+        productName: "Postman",
+        productVersion: "0.1",
         devicePixelRatio: Math.min(window.devicePixelRatio || 1, maxDevicePixelRatio),
         showBanner: unityShowBanner
       };
